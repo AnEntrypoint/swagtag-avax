@@ -1,6 +1,6 @@
-# `uDNS Dapp`
+# `SwagTag mainn et dApp`
 
-> This is the react app and smart contract for entrypoint's submission to the Avalanche Hackathon 2021/2022
+> This is the react app and smart contract for [An🎙️Entrypoint's](https://dsc.gg/entrypoint) submission for the Moralis Avalanche Hackathon 2021/2022
 
 This project is built on [react-moralis](https://github.com/MoralisWeb3/react-moralis) and [Moralis](https://moralis.io?utm_source=github&utm_medium=readme&utm_campaign=ethereum-boilerplate).
 
