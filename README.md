@@ -1,4 +1,4 @@
-# `SwagTag mainn et dApp`
+# `SwagTag main net dApp`
 
 > This is the react app and smart contract for [An🎙️Entrypoint's](https://dsc.gg/entrypoint) submission for the Moralis Avalanche Hackathon 2021/2022
 
