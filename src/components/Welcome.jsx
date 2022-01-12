@@ -24,9 +24,8 @@ export default function Welcome(props) {
           borderRadius: "0.5rem",
         }}
       >
-      {chainId}
         {(chainId!=='0xa869'||chainId!=='0xa86a')&&isAuthenticated?<div>
-            Please switch to Avax Testnet here on your Metamask:
+            Please switch to Avalanche mainnet here on your Metamask:
             <Chains/>
         </div>:null}
         {!isAuthenticated?<div>

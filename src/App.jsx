@@ -112,7 +112,7 @@ const App = ({ isServerInfo }) => {
             rel="noopener noreferrer"
             href="https://github.com/AnEntrypoint/universal-domains/wiki"
           >
-            µDNS
+            µns
           </a>
           📖
         </Text>

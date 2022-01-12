@@ -32,6 +32,7 @@ function NFTBalance() {
   const { networks, abi } = DNS;
   const [isPriceModalVisible, setIsPriceModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  console.log(networks);
   const contractAddress = useMemo(() => networks['1'].address, [networks]);
   const [ip, setIp] = useState();
   const [nft, setNft] = useState();
