@@ -41,14 +41,15 @@
         let nets = '';
         if(fetched) {
           const is = await fetched.text();
-          if(is) nets += nets.length?' and testnet':'testnet';
+          if(is === 'true') nets += nets.length?' and testnet':'testnet';
+          
           if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
           else output.innerHTML += 'not available';
         }
         fetched = await fetch('https://exists.avax.ga/'+document.querySelector('#swagtag').value);
         if(fetched) {
           const is = await fetched.text();
-          if(is) nets += nets.length?' and mainnet':'mainnet';
+          if(is === 'true') nets += nets.length?' and mainnet':'mainnet';
           if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
           else output.innerHTML += 'not available';
         }
@@ -56,7 +57,7 @@
       const processChange = debounce(() => saveInput());
     </script>
   </head>
-  <body class="text-center bg-grey-100 text-gray-600" style="font-family: 'Ubuntu'">
+  <body class="text-center bg-grey-100 text-gray-600" style="font-family: 'Ubuntu'; line-height: 1.2em;">
     <section
       class="bg-pink-100 h-screen w-full bg-cover text-center flex flex-col items-center justify-center"
       style="
@@ -83,7 +84,7 @@
         <div style="height:260px" class="carousel-inner relative w-full overflow-hidden">
           <div class="carousel-item active relative float-left w-full">
             <h1
-              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl leading-normal"
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
             >
               <span
               class="text-pink-300 font-bold mt-8 text-6xl"
@@ -97,7 +98,7 @@
           </div>
           <div class="carousel-item relative float-left w-full">
             <h1
-              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl leading-normal"
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
             >
               <span
               class="text-pink-300 font-bold mt-8 text-6xl"
@@ -126,7 +127,7 @@
           </div>
           <div class="carousel-item relative float-left  w-full">
             <h1
-              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl leading-normal"
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
             >
               <span
               class="text-pink-300 font-bold mt-8 text-6xl"
@@ -140,7 +141,7 @@
           </div>
           <div class="carousel-item relative float-left  w-full">
             <h1
-              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl leading-normal"
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
             >
               
               <span
@@ -246,7 +247,7 @@
             >swag<span class="text-blue-300">tag</span></span
           >
         </span>
-        <p class="leading-normal mb-4 text-center">
+        <p class=" mb-4 text-center">
           we explore the meaning of
           <span class="text-pink-400" style="font-family: 'Comfortaa'"
             >swag<span class="text-blue-400">tag</span></span
@@ -278,7 +279,7 @@
               >swag<span class="text-blue-400">tag</span></span
             >
           </h2>
-          <p class="sm:w-full leading-normal mb-4">
+          <p class="sm:w-full  mb-4">
             your
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
@@ -291,7 +292,7 @@
         >
           <div class="w-14 h-14 text-5xl" alt="">⏱</div>
           <h2 class="my-4 font-medium">instant domain</h2>
-          <p class="sm:w-full leading-normal mb-4">
+          <p class="sm:w-full  mb-4">
             you can have a website in 5 minutes or less with
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
@@ -303,11 +304,11 @@
         >
           <div class="w-14 h-14 text-5xl" alt="">💰</div>
           <h2 class="my-4 font-medium">provide services to names</h2>
-          <p class="sm:w-full leading-normal mb-4">
+          <p class="sm:w-full  mb-4">
             provide your product to users who own
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
-            >s, present it to them as their
+            >s present it to them as their
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
             >
@@ -322,7 +323,7 @@
         >
           <div class="w-14 h-14 text-5xl" alt="">🍺</div>
           <h2 class="my-4 font-medium">free as in open source</h2>
-          <p class="sm:w-full leading-normal mb-4">
+          <p class="sm:w-full mb-4">
             you can run the nameservice yourself or even check the source code for
             examples for your own projects and easily build software that uses
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
@@ -372,14 +373,14 @@
         class="w-full lg:w-1/2 flex flex-col justify-center items-start p-8 items-center lg:items-start"
       >
         <span class="justify-center font-bold"
-          >ethereum-boilerplate to
+          >ethereum boilerplate to
           <span class="text-pink-300" style="font-family: 'Comfortaa'"
             >swag<span class="text-blue-300">tag</span></span
           >
           <br />in 5 minutes</span
         >
         <h1 class="my-4 font-normal text-center">our work flow</h1>
-        <p class="leading-normal mb-4 text-center">
+        <p class="mb-4 text-center">
           we show you how to get your website running with
           <span class="text-pink-400" style="font-family: 'Comfortaa'"
             >swag<span class="text-blue-400">tag</span></span
@@ -416,7 +417,7 @@
       >
         <label for="tagline" class="font-bold">advanced features</label>
         <h1 class="my-4 font-normal">swarm ddns and tunneling</h1>
-        <p class="leading-normal mb-4">
+        <p class="mb-4">
           we demonstrate some of the advanced capabilities of
           <span class="text-pink-400" style="font-family: 'Comfortaa'"
             >swag<span class="text-blue-400">tag</span></span
