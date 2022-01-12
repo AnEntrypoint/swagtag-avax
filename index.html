@@ -34,9 +34,14 @@
                   = setTimeout(() => func.apply(context, args), delay)
           }
       } 
-      window.handlesubmit = ()=>{
-        window.location = 'dashboard.html#/'+document.querySelector('#swagtag').value;
-        
+      window.handlesubmit = (e)=>{
+          e.preventDefault(); 
+          try {
+           window.location = 'dashboard.html#/'+document.querySelector('#swagtag').value;
+          } catch (e) {
+           throw new Error(e.message);
+          }
+          return false;
       }
       window.saveInput = async ()=>{
         let fetched = await fetch('https://exists.fuji.avax.ga/'+document.querySelector('#swagtag').value);
@@ -70,7 +75,7 @@
           center;
       "
     >
-      <form onsubmit="handlesubmit">
+      <form onsubmit="return handlesubmit(event)">
         <input
           type="text"
           name="swagtag"
