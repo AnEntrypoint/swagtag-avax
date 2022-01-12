@@ -35,7 +35,7 @@
           }
       } 
       window.handlesubmit = ()=>{
-        let fetched = await fetch('dashboard.html#/'+document.querySelector('#swagtag').value);
+        window.location = 'dashboard.html#/'+document.querySelector('#swagtag').value;
         
       }
       window.saveInput = async ()=>{
