@@ -24,7 +24,21 @@
     />
     <title>swagtag</title>
     <script>
-      window.checkname = console.log;
+      window.debounce = (func, delay) => {
+          let debounceTimer
+          return function() {
+              const context = this
+              const args = arguments
+                  clearTimeout(debounceTimer)
+                      debounceTimer
+                  = setTimeout(() => func.apply(context, args), delay)
+          }
+      } 
+      window.checkname = async (e)=>{
+        const fetched = await fetch('https://exists.fuji.avax.ga/'+e.value);
+        
+        console.log(await fetched.text());
+      };
     </script>
   </head>
   <body class="text-center bg-grey-100 text-gray-600" style="font-family: 'Ubuntu'">
@@ -41,7 +55,7 @@
           id="company_website"
           class="bg-blue-400 placeholder-gray-200 text-4xl text-white block rounded-full sm:text-sm border-2 border-rose-300/50"
           placeholder="choose your swagtag"
-          oninput="checkname"
+          oninput="checkname(this)"
           style="text-align: center; font-size: 28px"
         />
       </div>
@@ -248,23 +262,24 @@
               >swag<span class="text-blue-400">tag</span></span
             >
           </h2>
-          <p class="leading-normal mb-4">
+          <p class="sm:w-full leading-normal mb-4">
             your
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
             >
-            belongs to you</p>
+            belongs is immediate lasts forever and you can configure it yourself
+          </p>
         </div>
         <div
           class="lg:w-1/5 md:w-1/2 sm:w-full flex flex-col items-center justify-center p-4"
         >
           <div class="w-14 h-14 text-5xl" alt="">⏱</div>
           <h2 class="my-4 font-medium">instant domain</h2>
-          <p class="leading-normal mb-4">
-            You can have a website in 5 minutes or less with
+          <p class="sm:w-full leading-normal mb-4">
+            you can have a website in 5 minutes or less with
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
-            >
+            > you can even host with github pages
           </p>
         </div>
         <div
@@ -272,7 +287,7 @@
         >
           <div class="w-14 h-14 text-5xl" alt="">💰</div>
           <h2 class="my-4 font-medium">provide services to names</h2>
-          <p class="leading-normal mb-4">
+          <p class="sm:w-full leading-normal mb-4">
             provide your product to users who own
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
@@ -291,7 +306,7 @@
         >
           <div class="w-14 h-14 text-5xl" alt="">🍺</div>
           <h2 class="my-4 font-medium">free as in open source</h2>
-          <p class="leading-normal mb-4">
+          <p class="sm:w-full leading-normal mb-4">
             you can run the nameservice yourself or even check the source code for
             examples for your own projects and easily build software that uses
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
@@ -308,13 +323,13 @@
               >swag<span class="text-blue-400">tag</span></span
             >s are freedom
           </h2>
-          <p class="leading-normal mb-4">
+          <div class="sm:w-full text-center">
             you can accept payments via any network because you can provide
             services to
             <span class="text-pink-400" style="font-family: 'Comfortaa'"
               >swag<span class="text-blue-400">tag</span></span
             >s without any extra code
-          </p>
+          </div>
         </div>
       </div>
     </section>
