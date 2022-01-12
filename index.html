@@ -34,6 +34,10 @@
                   = setTimeout(() => func.apply(context, args), delay)
           }
       } 
+      window.handlesubmit = ()=>{
+        let fetched = await fetch('dashboard.html#/'+document.querySelector('#swagtag').value);
+        
+      }
       window.saveInput = async ()=>{
         let fetched = await fetch('https://exists.fuji.avax.ga/'+document.querySelector('#swagtag').value);
         const output = document.querySelector('#output')
@@ -66,7 +70,7 @@
           center;
       "
     >
-      <div class=" ">
+      <form onsubmit="handlesubmit">
         <input
           type="text"
           name="swagtag"
@@ -76,7 +80,7 @@
           oninput="processChange()"
           style="text-align: center; font-size: 24px"
         />
-      </div>
+      </form>
       <div id="output"></div>
       <div
         id="carouselExampleControls"
