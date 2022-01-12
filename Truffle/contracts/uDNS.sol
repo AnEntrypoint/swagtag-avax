@@ -18,7 +18,7 @@ contract UDNS is ERC721URIStorage, ERC721Enumerable, Ownable {
     //IERC20 currencyToken;
     IERC721 itemToken;
 
-    constructor(/*address _currencyTokenAddress*/) ERC721("UDNS", "UDT") {
+    constructor(/*address _currencyTokenAddress*/) ERC721("swagtag", "SWG") {
         //currencyToken = IERC20(_currencyTokenAddress);
         itemToken = IERC721(address(this));
         tradeCounter = 0;

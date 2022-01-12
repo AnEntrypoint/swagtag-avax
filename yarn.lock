@@ -5957,7 +5957,7 @@
     "rlp" "^2.0.0"
     "safe-buffer" "^5.1.1"
 
-"ethereumjs-util@^5.1.1", "ethereumjs-util@^5.1.5":
+"ethereumjs-util@^5.1.1", "ethereumjs-util@^5.1.2", "ethereumjs-util@^5.1.5":
   "integrity" "sha512-v3kT+7zdyCm1HIqWlLNrHGqHGLpGYIhjeHxQjnDXjLT2FyGJDsd3LWMYUo7pAFRrk86CR3nUJfhC81CCoJNNGQ=="
   "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-5.2.1.tgz"
   "version" "5.2.1"
@@ -5970,20 +5970,7 @@
     "rlp" "^2.0.0"
     "safe-buffer" "^5.1.1"
 
-"ethereumjs-util@^5.1.2":
-  "integrity" "sha512-v3kT+7zdyCm1HIqWlLNrHGqHGLpGYIhjeHxQjnDXjLT2FyGJDsd3LWMYUo7pAFRrk86CR3nUJfhC81CCoJNNGQ=="
-  "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-5.2.1.tgz"
-  "version" "5.2.1"
-  dependencies:
-    "bn.js" "^4.11.0"
-    "create-hash" "^1.1.2"
-    "elliptic" "^6.5.2"
-    "ethereum-cryptography" "^0.1.3"
-    "ethjs-util" "^0.1.3"
-    "rlp" "^2.0.0"
-    "safe-buffer" "^5.1.1"
-
-"ethereumjs-util@^6.0.0":
+"ethereumjs-util@^6.0.0", "ethereumjs-util@^6.1.0":
   "integrity" "sha512-W2Ktez4L01Vexijrm5EB6w7dg4n/TgpoYU4avuT5T3Vmnw/eCRtiBrJfQYS/DCSvDIOLn2k57GcHdeBcgVxAqw=="
   "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-6.2.1.tgz"
   "version" "6.2.1"
@@ -5996,20 +5983,40 @@
     "ethjs-util" "0.1.6"
     "rlp" "^2.2.3"
 
-"ethereumjs-util@^6.1.0":
-  "integrity" "sha512-W2Ktez4L01Vexijrm5EB6w7dg4n/TgpoYU4avuT5T3Vmnw/eCRtiBrJfQYS/DCSvDIOLn2k57GcHdeBcgVxAqw=="
-  "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-6.2.1.tgz"
-  "version" "6.2.1"
+"ethereumjs-util@^7.0.10":
+  "integrity" "sha512-y+82tEbyASO0K0X1/SRhbJJoAlfcvq8JbrG4a5cjrOks7HS/36efU/0j2flxCPOUM++HFahk33kr/ZxyC4vNuw=="
+  "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-7.1.3.tgz"
+  "version" "7.1.3"
   dependencies:
-    "@types/bn.js" "^4.11.3"
-    "bn.js" "^4.11.0"
+    "@types/bn.js" "^5.1.0"
+    "bn.js" "^5.1.2"
     "create-hash" "^1.1.2"
-    "elliptic" "^6.5.2"
     "ethereum-cryptography" "^0.1.3"
-    "ethjs-util" "0.1.6"
-    "rlp" "^2.2.3"
+    "rlp" "^2.2.4"
 
-"ethereumjs-util@^7.0.10", "ethereumjs-util@^7.1.0", "ethereumjs-util@^7.1.2", "ethereumjs-util@^7.1.3":
+"ethereumjs-util@^7.1.0":
+  "integrity" "sha512-y+82tEbyASO0K0X1/SRhbJJoAlfcvq8JbrG4a5cjrOks7HS/36efU/0j2flxCPOUM++HFahk33kr/ZxyC4vNuw=="
+  "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-7.1.3.tgz"
+  "version" "7.1.3"
+  dependencies:
+    "@types/bn.js" "^5.1.0"
+    "bn.js" "^5.1.2"
+    "create-hash" "^1.1.2"
+    "ethereum-cryptography" "^0.1.3"
+    "rlp" "^2.2.4"
+
+"ethereumjs-util@^7.1.2":
+  "integrity" "sha512-y+82tEbyASO0K0X1/SRhbJJoAlfcvq8JbrG4a5cjrOks7HS/36efU/0j2flxCPOUM++HFahk33kr/ZxyC4vNuw=="
+  "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-7.1.3.tgz"
+  "version" "7.1.3"
+  dependencies:
+    "@types/bn.js" "^5.1.0"
+    "bn.js" "^5.1.2"
+    "create-hash" "^1.1.2"
+    "ethereum-cryptography" "^0.1.3"
+    "rlp" "^2.2.4"
+
+"ethereumjs-util@^7.1.3":
   "integrity" "sha512-y+82tEbyASO0K0X1/SRhbJJoAlfcvq8JbrG4a5cjrOks7HS/36efU/0j2flxCPOUM++HFahk33kr/ZxyC4vNuw=="
   "resolved" "https://registry.npmjs.org/ethereumjs-util/-/ethereumjs-util-7.1.3.tgz"
   "version" "7.1.3"
@@ -13808,7 +13815,7 @@
   "resolved" "https://registry.npmjs.org/tweetnacl-util/-/tweetnacl-util-0.15.1.tgz"
   "version" "0.15.1"
 
-"tweetnacl@^0.14.3", "tweetnacl@~0.14.0":
+"tweetnacl@^0.14.3":
   "integrity" "sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q="
   "resolved" "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
   "version" "0.14.5"
@@ -13817,6 +13824,11 @@
   "integrity" "sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw=="
   "resolved" "https://registry.npmjs.org/tweetnacl/-/tweetnacl-1.0.3.tgz"
   "version" "1.0.3"
+
+"tweetnacl@~0.14.0":
+  "integrity" "sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q="
+  "resolved" "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
+  "version" "0.14.5"
 
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="

@@ -2,7 +2,7 @@ import React from "react";
 
 function Logo() {
   return (
-     <img style={{height:"4em"}} src="https://media.discordapp.net/attachments/513305474976710667/927529827160977478/udns.png" alt="logo"/>
+     <h1 style={{color:"#fbb6ce", fontFamily:"comfortaa"}}>swag<span style={{color:'#93c5fd'}}>tag</span></h1>
   );
 }
 export default Logo;
