@@ -24,7 +24,7 @@
     />
     <title>swagtag</title>
     <script>
-      window.debounce = (func, delay) => {
+      window.debounce = (func, delay=1000) => {
           let debounceTimer
           return function() {
               const context = this
@@ -34,11 +34,26 @@
                   = setTimeout(() => func.apply(context, args), delay)
           }
       } 
-      window.checkname = async (e)=>{
-        const fetched = await fetch('https://exists.fuji.avax.ga/'+e.value);
-        
-        console.log(await fetched.text());
+      window.saveInput = async ()=>{
+        let fetched = await fetch('https://exists.fuji.avax.ga/'+document.querySelector('#swagtag').value);
+        const output = document.querySelector('#output')
+        output.innerHTML = '';
+        let nets = '';
+        if(fetched) {
+          const is = await fetched.text();
+          if(is) nets += nets.length?' and testnet':'testnet';
+          if(nets.length > 0) output.innerHTML += `<p><a href="https://dashboard.fuji.avax.ga/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
+          else output.innerHTML += 'not available';
+        }
+        fetched = await fetch('https://exists.avax.ga/'+document.querySelector('#swagtag').value);
+        if(fetched) {
+          const is = await fetched.text();
+          if(is) nets += nets.length?' and mainnet':'mainnet';
+          if(nets.length > 0) output.innerHTML += `<p><a href="https://dashboard.fuji.avax.ga/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
+          else output.innerHTML += 'not available';
+        }
       };
+      const processChange = debounce(() => saveInput());
     </script>
   </head>
   <body class="text-center bg-grey-100 text-gray-600" style="font-family: 'Ubuntu'">
@@ -51,14 +66,15 @@
       <div class=" ">
         <input
           type="text"
-          name="company_website"
-          id="company_website"
+          name="swagtag"
+          id="swagtag"
           class="bg-blue-400 placeholder-gray-200 text-4xl text-white block rounded-full sm:text-sm border-2 border-rose-300/50"
           placeholder="choose your swagtag"
-          oninput="checkname(this)"
+          oninput="processChange()"
           style="text-align: center; font-size: 28px"
         />
       </div>
+      <div id="output"></div>
       <div
         id="carouselExampleControls"
         class="carousel slide w-full relative"
