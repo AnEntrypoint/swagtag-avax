@@ -9,11 +9,11 @@
   border-bottom: 2px solid #8873ff !important;
 }
 #root > section > header > div:nth-child(4) > div > p {
-  color: #bf219d !important;
+  color: #f689b3 !important;
 }
 .ant-menu-horizontal > .ant-menu-item-selected a,
 .ant-menu-horizontal > .ant-menu-item a:hover {
-  color: #bf219d !important;
+  color: #f689b3 !important;
 }
 
 .ant-modal-content {

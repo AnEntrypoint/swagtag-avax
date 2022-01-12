@@ -1,13 +1,12 @@
 import { Card, Button, Spin } from "antd";
-import { useMemo, useState, useEffect } from "react";
-import DNS from "contracts/DNS.json";
+import { useState, useEffect } from "react";
+import DNS from "contracts/swagtag.js";
 import { useMoralis, useMoralisQuery } from "react-moralis";
 import Address from "components/Address/Address";
 
 export default function Market(props) {
-  const { Moralis } = useMoralis();
-  const { contractName, networks, abi } = DNS;
-  const contractAddress = useMemo(() => networks['1'].address, [networks]);
+  const { Moralis, chainId } = useMoralis();
+
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
@@ -17,13 +16,18 @@ export default function Market(props) {
   }, [], {
       live: true,
       onCreate: (res) => {
-        //data.push(res);
-        //setData(data);
+        console.log({res});
+        data.push(res);
+        setData(data);
       }
   });
   useEffect(() => {
     setData(query.data);
   }, [query]);
+
+  if(!chainId) return '';
+  const { networks, abi } = DNS[chainId];
+  const contractAddress = networks['1'].address;
 
   const buy = async (_trade, value)=>{
       const options = {
@@ -63,7 +67,7 @@ export default function Market(props) {
       <Card
         title={
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            Contract: {contractName}
+            swagtag avalanche
             <Address avatar="left" copyable address={contractAddress} size={8} />
           </div>
         }

@@ -1,14 +1,14 @@
 import { Card, Form, Button, Input, Modal, Spin } from "antd";
 import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { useMoralis } from "react-moralis";
-import DNS from "contracts/DNS.json";
+import DNS from "contracts/swagtag.js";
 import Address from "components/Address/Address";
 
 export default function Dashboard(props) {
-  const { account, isAuthenticated, Moralis } = useMoralis();
+  const { account, isAuthenticated, Moralis, chainid } = useMoralis();
   const [ip, setIp] = useState();
   const [price, setPrice] = useState();
-  const { contractName, networks, abi } = DNS;
+  const { contractName, networks, abi } = DNS[chainId];
   const contractAddress = useMemo(() => networks['1'].address, [networks]);
   const [domain, setDomain] = useState(window.landed);
   const [name, setName] = useState();

@@ -1,6 +1,6 @@
 import { Card, Form, notification } from "antd";
 import { useMemo, useState } from "react";
-import DNS from "contracts/DNS.json";
+import DNS from "contracts/swagtag.js";
 import Address from "components/Address/Address";
 import { useMoralis, useMoralisQuery } from "react-moralis";
 import { getEllipsisTxt } from "helpers/formatters";

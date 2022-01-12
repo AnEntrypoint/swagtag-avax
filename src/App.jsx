@@ -12,13 +12,14 @@ import Text from "antd/lib/typography/Text";
 import Logo from "components/Logo";
 import MenuItems from "./components/MenuItems";
 import { useMoralis } from "react-moralis";
+import Chains from "components/Chains";
 const { Header, Footer } = Layout;
 
 const styles = {
   content: {
     display: "flex",
     justifyContent: "center",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Ubuntu",
     color: "#bf219d",
     marginTop: "130px",
     padding: "10px",
@@ -27,11 +28,11 @@ const styles = {
     position: "fixed",
     zIndex: 1,
     width: "100%",
-    background: "#fff",
+    background: "#ebf8ff",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Ubuntu",
     borderBottom: "2px solid rgba(0, 0, 0, 0.06)",
     padding: "0 10px",
     boxShadow: "0 1px 10px rgb(151 164 175 / 10%)",
@@ -55,12 +56,13 @@ const App = ({ isServerInfo }) => {
   }, [isAuthenticated, isWeb3Enabled]);
 
   return (
-    <Layout style={{ height: "100vh", overflow: "auto"}}>
+    <Layout style={{ height: "100vh", overflow: "auto", background:'#fff'}}>
       <Router>
         <Header style={styles.header}>
           <Logo />
           <MenuItems />
           <div style={styles.headerRight}>
+            <Chains/>
             <Account />
           </div>
         </Header>
@@ -88,12 +90,12 @@ const App = ({ isServerInfo }) => {
           </Switch>
         </div>
       </Router>
-      <Footer style={{ textAlign: "center"}}>
+      <Footer style={{ textAlign: "center", background:"#fff"}}>
         <Text style={{ display: "block" }}>
           ⭐️ Please star this{" "}
-          <button href="https://github.com/AnEntrypoint/udns-dapp" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/AnEntrypoint/udns-dapp" target="_blank" rel="noopener noreferrer">
             internet breaking project
-          </button>
+          </a>
           , every star makes us very happy!! ⭐️
         </Text>
 
@@ -107,12 +109,17 @@ const App = ({ isServerInfo }) => {
 
         <Text style={{ display: "block" }}>
           📖 Read more about{" "}
+           
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/AnEntrypoint/universal-domains/wiki"
+            href="https://github.com/AnEntrypoint/swagtag-avax/wiki"
           >
-            µns
+            <span
+              className="text-pink-300 font-bold mt-8 text-6xl"
+              style={{fontFamily:'Comfortaa'}}
+              >swag<span className="text-blue-300">tag</span>
+              </span>
           </a>
           📖
         </Text>

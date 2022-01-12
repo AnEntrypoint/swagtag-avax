@@ -13,7 +13,7 @@ export default function Welcome(props) {
       <Card
         title={
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            Welcome to µDNS!
+            swagtag
           </div>
         }
         size="large"
