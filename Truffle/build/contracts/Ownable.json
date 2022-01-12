@@ -2524,36 +2524,9 @@
     "name": "solc",
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
-  "networks": {
-    "1": {
-      "events": {
-        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0xa05968A96aff9e1337A48c13A6934fb0b665105B",
-      "transactionHash": "0x93f1594cbc9af474275de55d9a2474fd1b20e83e9d0449e14da75bcf5486c610"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-04T13:51:40.217Z",
+  "updatedAt": "2022-01-05T14:36:05.432Z",
   "devdoc": {
     "details": "Contract module which provides a basic access control mechanism, where there is an account (an owner) that can be granted exclusive access to specific functions. By default, the owner account will be the one that deploys the contract. This can later be changed with {transferOwnership}. This module is used through inheritance. It will make available the modifier `onlyOwner`, which can be applied to your functions to restrict their use to the owner.",
     "kind": "dev",
