@@ -44,7 +44,7 @@
           console.log(is);
           if(is === 'true') nets += nets.length?' and testnet':'testnet';
           
-          if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
+          if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">available on ${nets}, click here to register</a></p>`;
           else output.innerHTML += 'not available';
         }
         /*fetched = await fetch('https://exists.avax.ga/'+document.querySelector('#swagtag').value);
@@ -54,7 +54,7 @@
           if(is === 'true') nets += nets.length?' and mainnet':'mainnet';
           if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
           else output.innerHTML += 'not available';
-        }
+        }*/
       };
       const processChange = debounce(() => saveInput());
     </script>
