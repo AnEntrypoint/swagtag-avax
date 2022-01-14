@@ -67,6 +67,7 @@
       "
     >
       <div class=" ">
+        <form onsubmit="location = '/dashboard.html#/'+document.getElementById('swagtag').value">
         <input
           type="text"
           name="swagtag"
@@ -76,6 +77,7 @@
           oninput="processChange()"
           style="text-align: center; font-size: 24px"
         />
+      </form>
       </div>
       <div id="output"></div>
       <div
