@@ -34,15 +34,6 @@
                   = setTimeout(() => func.apply(context, args), delay)
           }
       } 
-      window.handlesubmit = (e)=>{
-          e.preventDefault(); 
-          try {
-           window.location = 'dashboard.html#/'+document.querySelector('#swagtag').value;
-          } catch (e) {
-           throw new Error(e.message);
-          }
-          return false;
-      }
       window.saveInput = async ()=>{
         let fetched = await fetch('https://exists.fuji.avax.ga/'+document.querySelector('#swagtag').value);
         const output = document.querySelector('#output')
@@ -75,7 +66,7 @@
           center;
       "
     >
-      <form onsubmit="return handlesubmit(event)">
+      <div class=" ">
         <input
           type="text"
           name="swagtag"
@@ -85,7 +76,7 @@
           oninput="processChange()"
           style="text-align: center; font-size: 24px"
         />
-      </form>
+      </div>
       <div id="output"></div>
       <div
         id="carouselExampleControls"
@@ -246,7 +237,10 @@
       class="my-8 pt-8 container font-sans max-w-xl m-auto flex flex-col-reverse lg:flex-row text-center lg:text-left sm:items-center"
     >
       <div class="w-full lg:w-1/2">
-        <iframe class="w-full lg:w-1/2" height="350" src="https://www.youtube.com/embed/V5WrNT48H7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <img
+          src="https://cdn.glitch.global/d77c0e84-7fb2-4481-b212-ed6afe840db0/83b25e5a-cb8d-4e3a-8ae7-b8a6f5f3afb7.image.png?v=1641595695167"
+          alt=""
+        />
       </div>
       <div class="w-full lg:w-1/2 text-center">
         <span class="font-bold"
@@ -361,14 +355,14 @@
     <section class="font-sans text-center my-8 bg-blue-300 p-8">
       <h1 class="font-medium text-white">need to know more</h1>
       <p class="text-white mt-2 mb-6">we have a wiki</p>
-      <a href="https://github.com/AnEntrypoint/swagtag-avax/wiki"
+      <button
         class="bg-blue-500 hover:bg-blue-900 text-white hover:text-white py-3 px-6 uppercase text-xs tracking-wide"
       >
         learn more
-      </a>
+      </button>
     </section>
 
-    <!--section
+    <section
       class="my-8 pt-8 container font-sans max-w-xl m-auto flex flex-col-reverse lg:flex-row text-center lg:text-left sm:items-center"
     >
       <div class="w-full lg:w-1/2">
@@ -439,7 +433,7 @@
           alt=""
         />
       </div>
-    </section-->
+    </section>
 
     <section
       class="bg-pink-100 w-full bg-cover text-center flex flex-col items-center justify-center"
@@ -488,28 +482,28 @@
         </li>
         <li>
           <a
-            href="https://github.com/AnEntrypoint/swagtag-cli"
+            href="#"
             class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
             >client app</a
           >
         </li>
         <li>
           <a
-            href="https://github.com/AnEntrypoint/swagtag-nameserver"
+            href="#"
             class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
             >nameserver</a
           >
         </li>
         <li>
           <a
-            href="https://github.com/lanmower/hyper-web-relay"
+            href="#"
             class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
             >relay</a
           >
         </li>
         <li>
           <a
-            href="https://github.com/AnEntrypoint/swagtag-avax"
+            href="#"
             class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
             >source</a
           >
