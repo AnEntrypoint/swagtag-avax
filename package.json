@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv build/index.html build/dashboard.html && cp index.html build/index.html && echo 'uns.avax.ga' > ./build/CNAME",
+    "build": "react-scripts build && mv build/index.html build/dashboard.html && cp index.html build/index.html && echo 'www.avax.ga' > ./build/CNAME",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "devchain": "node Truffle/scripts/devChain.js",
