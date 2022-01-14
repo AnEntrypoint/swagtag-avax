@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href=https://stitches.hyperyolo.com/output.css rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Comfortaa"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet"
+    href=https://use.fontawesome.com/releases/v5.6.3/css/all.css
+    integrity=sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/
+    crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"
+    />
+    <title>swagtag</title>
+    <script>
+      window.debounce = (func, delay=1000) => {
+          let debounceTimer
+          return function() {
+              const context = this
+              const args = arguments
+                  clearTimeout(debounceTimer)
+                      debounceTimer
+                  = setTimeout(() => func.apply(context, args), delay)
+          }
+      } 
+      window.saveInput = async ()=>{
+        let fetched = await fetch('https://exists.fuji.avax.ga/'+document.querySelector('#swagtag').value);
+        const output = document.querySelector('#output')
+        output.innerHTML = '';
+        let nets = '';
+        if(fetched) {
+          const is = await fetched.text();
+          console.log(is);
+          if(is === 'true') nets += nets.length?' and testnet':'testnet';
+          
+          if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
+          else output.innerHTML += 'not available';
+        }
+        fetched = await fetch('https://exists.avax.ga/'+document.querySelector('#swagtag').value);
+        if(fetched) {
+          const is = await fetched.text();
+          console.log(is);
+          if(is === 'true') nets += nets.length?' and mainnet':'mainnet';
+          if(nets.length > 0) output.innerHTML += `<p><a href="/dashboard.html#/${document.querySelector('#swagtag').value}">click here to register</a></p>`;
+          else output.innerHTML += 'not available';
+        }
+      };
+      const processChange = debounce(() => saveInput());
+    </script>
+  </head>
+  <body class="text-center bg-grey-100 text-gray-600" style="font-family: 'Ubuntu'; line-height: 1.2em;">
+    <section
+      class="bg-pink-100 h-screen w-full bg-cover text-center flex flex-col items-center justify-center"
+      style="
+          center;
+      "
+    >
+      <div class=" ">
+        <input
+          type="text"
+          name="swagtag"
+          id="swagtag"
+          class="bg-blue-400 placeholder-gray-200 text-4xl text-white block rounded-full sm:text-sm border-2 border-rose-300/50"
+          placeholder="choose your swagtag"
+          oninput="processChange()"
+          style="text-align: center; font-size: 24px"
+        />
+      </div>
+      <div id="output"></div>
+      <div
+        id="carouselExampleControls"
+        class="carousel slide w-full relative"
+        data-bs-ride="carousel"
+      >
+        <div style="height:260px" class="carousel-inner relative w-full overflow-hidden">
+          <div class="carousel-item active relative float-left w-full">
+            <h1
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
+            >
+              <span
+              class="text-pink-300 font-bold mt-8 text-6xl"
+              style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-300">tag</span>
+              </span>
+              <p>
+                instant domain
+              </p>
+            </h1>
+          </div>
+          <div class="carousel-item relative float-left w-full">
+            <h1
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
+            >
+              <span
+              class="text-pink-300 font-bold mt-8 text-6xl"
+              style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-300">tag</span>
+              </span>
+              <p>
+                looks like
+              </p>
+              <p>
+                <span
+              class="text-pink-300 font-bold"
+              style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-300">tag</span>
+                </span>&nbsp;<span class="text-pink-300">yourproject</span>&nbsp;<span class="text-pink-300">com</span>
+              </p>
+              your homepage
+              <p>
+                <span
+              class="text-pink-300 font-bold"
+              style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-300">tag</span>
+                </span>&nbsp;<span class="text-pink-300">avax</span>&nbsp;<span class="text-pink-300">ga</span>
+              </p>
+            </h1>
+          </div>
+          <div class="carousel-item relative float-left  w-full">
+            <h1
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
+            >
+              <span
+              class="text-pink-300 font-bold mt-8 text-6xl"
+              style="font-family: 'Comfortaa'"
+              >99&nbsp;<span class="text-blue-300">99</span>
+              </span>
+              <p>
+                of subdomains are unused
+              </p>
+            </h1>
+          </div>
+          <div class="carousel-item relative float-left  w-full">
+            <h1
+              class="text-blue-300 mx-auto max-w-sm mt-4 font-normal text-3xl "
+            >
+              
+              <span
+              class="text-pink-300 font-bold mt-8 text-6xl"
+              style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-300">tag</span>
+              </span>
+              <p>
+                an <span class="text-pink-300">ERC721</span> namespace
+              </p>
+            </h1>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span
+            class="carousel-control-prev-icon inline-block bg-no-repeat"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span
+            class="carousel-control-next-icon inline-block bg-no-repeat"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+    <section
+      class="font-sans flex justify-between text-blue-200 mt-6 mx-auto max-w-xl p-8"
+    >
+      <a
+        href="#"
+        class="w-1/4 flex flex-col items-center text-center text-xs no-underline"
+      >
+        <div
+          class="bg-blue-200 text-white rounded-full h-8 w-8 flex items-center justify-center mb-2 z-10"
+        >
+          <i class="fas fa-check"></i>
+        </div>
+        <label class="tracking-wide"
+          >choose
+          <span
+            class="text-pink-300 font-bold"
+            style="font-family: 'Comfortaa'; font-size: 22px"
+            >swag<span class="text-blue-200">tag</span></span
+          ></label
+        >
+      </a>
+      <a
+        href="#"
+        class="w-1/4 relative flex flex-col items-center text-center text-xs no-underline"
+      >
+        <div
+          class="bg-blue-300 text-white rounded-full h-8 w-8 flex items-center justify-center mb-2 z-10"
+        >
+          <i class="fas fa-check"></i>
+        </div>
+        <div
+          class="absolute h-1 mt-4 bg-blue-300 inset-x-0 -translate-50-50"
+        ></div>
+        <label class="font-bold uppercase tracking-wide">Configure</label>
+      </a>
+      <a
+        href="#"
+        class="w-1/4 relative flex text-blue-300 flex-col items-center text-center text-xs no-underline"
+      >
+        <div
+          class="bg-blue-300 text-white rounded-full h-8 w-8 flex items-center justify-center mb-2 z-10"
+        >
+          <i class="fas fa-check"></i>
+        </div>
+        <div
+          class="absolute h-1 mt-4 bg-blue-300 inset-x-0 -translate-50-50"
+        ></div>
+        <label class="font-bold uppercase tracking-wide">Enjoy</label>
+      </a>
+    </section>
+    <section
+      class="my-8 pt-8 container font-sans max-w-xl m-auto flex flex-col-reverse lg:flex-row text-center lg:text-left sm:items-center"
+    >
+      <div class="w-full lg:w-1/2">
+        <img
+          src="https://cdn.glitch.global/d77c0e84-7fb2-4481-b212-ed6afe840db0/83b25e5a-cb8d-4e3a-8ae7-b8a6f5f3afb7.image.png?v=1641595695167"
+          alt=""
+        />
+      </div>
+      <div class="w-full lg:w-1/2 text-center">
+        <span class="font-bold"
+          >introduction to
+          <span class="text-pink-300" style="font-family: 'Comfortaa'"
+            >swag<span class="text-blue-300">tag</span></span
+          >
+        </span>
+        <p class=" mb-4 text-center">
+          we explore the meaning of
+          <span class="text-pink-400" style="font-family: 'Comfortaa'"
+            >swag<span class="text-blue-400">tag</span></span
+          >
+          and what it can do
+        </p>
+      </div>
+    </section>
+    <section class="font-sans m-auto text-center py-8 bg-blue-300 text-white">
+      <label for="tagline" class="uppercase tracking-wide font-bold"
+        >features</label
+      >
+      <h1 class="mt-2 mb-4 font-medium max-w-sm m-auto">
+        <span class="text-pink-200" style="font-family: 'Comfortaa'"
+          >swag<span class="text-blue-200">tag</span></span
+        >
+        is a unique service and it has unique features
+      </h1>
+    </section>
+    <section class="font-sans container m-auto text-center py-8">
+      <div class="flex flex-wrap justify-between items-start">
+        <div
+          class="lg:w-1/5 md:w-1/2 sm:w-full flex flex-col items-center justify-center p-4"
+        >
+          <div class="w-14 h-14 text-5xl" alt="">😎</div>
+          <h2 class="my-4 font-medium">
+            own your
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >
+          </h2>
+          <p class="sm:w-full  mb-4">
+            your
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >
+            belongs is immediate lasts forever and you can configure it yourself
+          </p>
+        </div>
+        <div
+          class="lg:w-1/5 md:w-1/2 sm:w-full flex flex-col items-center justify-center p-4"
+        >
+          <div class="w-14 h-14 text-5xl" alt="">⏱</div>
+          <h2 class="my-4 font-medium">instant domain</h2>
+          <p class="sm:w-full  mb-4">
+            you can have a website in 5 minutes or less with
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            > you can even host with github pages
+          </p>
+        </div>
+        <div
+          class="lg:w-1/5 md:w-1/2 sm:w-full flex flex-col items-center justify-center p-4"
+        >
+          <div class="w-14 h-14 text-5xl" alt="">💰</div>
+          <h2 class="my-4 font-medium">provide services to names</h2>
+          <p class="sm:w-full  mb-4">
+            provide your product to users who own
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >s present it to them as their
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >
+            on your projects domain
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >.yourproject.io
+          </p>
+        </div>
+        <div
+          class="lg:w-1/5 md:w-1/2 sm:w-full flex flex-col items-center justify-center p-4"
+        >
+          <div class="w-14 h-14 text-5xl" alt="">🍺</div>
+          <h2 class="my-4 font-medium">free as in open source</h2>
+          <p class="sm:w-full mb-4">
+            you can run the nameservice yourself or even check the source code for
+            examples for your own projects and easily build software that uses
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >s
+          </p>
+        </div>
+        <div
+          class="lg:w-1/5 sm:w-full md:w-full flex flex-col items-center justify-center p-4"
+        >
+          <div class="w-14 h-14 text-5xl" alt="">🎈</div>
+          <h2 class="my-4 font-medium">
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >s are freedom
+          </h2>
+          <div class="sm:w-full text-center">
+            you can accept payments via any network because you can provide
+            services to
+            <span class="text-pink-400" style="font-family: 'Comfortaa'"
+              >swag<span class="text-blue-400">tag</span></span
+            >s without any extra code
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="font-sans text-center my-8 bg-blue-300 p-8">
+      <h1 class="font-medium text-white">need to know more</h1>
+      <p class="text-white mt-2 mb-6">we have a wiki</p>
+      <button
+        class="bg-blue-500 hover:bg-blue-900 text-white hover:text-white py-3 px-6 uppercase text-xs tracking-wide"
+      >
+        learn more
+      </button>
+    </section>
+
+    <section
+      class="my-8 pt-8 container font-sans max-w-xl m-auto flex flex-col-reverse lg:flex-row text-center lg:text-left sm:items-center"
+    >
+      <div class="w-full lg:w-1/2">
+        <img
+          src="https://cdn.glitch.global/d77c0e84-7fb2-4481-b212-ed6afe840db0/83b25e5a-cb8d-4e3a-8ae7-b8a6f5f3afb7.image.png?v=1641595695167"
+          alt=""
+        />
+      </div>
+      <div
+        class="w-full lg:w-1/2 flex flex-col justify-center items-start p-8 items-center lg:items-start"
+      >
+        <span class="justify-center font-bold"
+          >ethereum boilerplate to
+          <span class="text-pink-300" style="font-family: 'Comfortaa'"
+            >swag<span class="text-blue-300">tag</span></span
+          >
+          <br />in 5 minutes</span
+        >
+        <h1 class="my-4 font-normal text-center">our work flow</h1>
+        <p class="mb-4 text-center">
+          we show you how to get your website running with
+          <span class="text-pink-400" style="font-family: 'Comfortaa'"
+            >swag<span class="text-blue-400">tag</span></span
+          >
+          using free hosting in 5 minutes
+        </p>
+      </div>
+    </section>
+    <section class="lg:px-4 bg-blue-100" role="alert">
+      <div
+        class="items-center flex max-w-xl m-auto leading-none bg-blue-300 text-white p-5"
+      >
+        <span
+          class="flex rounded-full text-blue-300 bg-white uppercase px-2 py-1 text-xs font-bold mr-3"
+          >New</span
+        >
+        <span class="mr-2 text-left mr-auto"
+          >cname
+          <span class="text-pink-300" style="font-family: 'Comfortaa'"
+            >swag<span class="text-blue-400">tag</span></span
+          >
+          configures google pages and glitch</span
+        >
+        <span class="opacity-75 h-4 w-4"
+          ><i class="fas fa-chevron-right"></i
+        ></span>
+      </div>
+    </section>
+    <section
+      class="my-8 pt-8 container font-sans max-w-xl m-auto flex flex-col-reverse lg:flex-row text-center lg:text-left sm:items-center"
+    >
+      <div
+        class="w-full lg:w-1/2 flex flex-col justify-center items-start p-8 items-center lg:items-start"
+      >
+        <label for="tagline" class="font-bold">advanced features</label>
+        <h1 class="my-4 font-normal">swarm ddns and tunneling</h1>
+        <p class="mb-4">
+          we demonstrate some of the advanced capabilities of
+          <span class="text-pink-400" style="font-family: 'Comfortaa'"
+            >swag<span class="text-blue-400">tag</span></span
+          >
+          by running the client
+        </p>
+      </div>
+      <div class="w-full lg:w-1/2">
+        <img
+          src="https://cdn.glitch.global/d77c0e84-7fb2-4481-b212-ed6afe840db0/83b25e5a-cb8d-4e3a-8ae7-b8a6f5f3afb7.image.png?v=1641595695167"
+          alt=""
+        />
+      </div>
+    </section>
+
+    <section
+      class="bg-pink-100 w-full bg-cover text-center flex flex-col items-center justify-center"
+      style="
+          center;
+      "
+    >
+      <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+        <span class="text-pink-400" style="font-family: 'Comfortaa'"
+          >swag<span class="text-blue-400">tag</span></span
+        >
+        is designed so that you can offer services to
+        <span class="text-pink-400" style="font-family: 'Comfortaa'"
+          >swag<span class="text-blue-400">tag</span></span
+        >s without needing any additional software, a user simply has to
+        identify their
+        <span class="text-pink-400" style="font-family: 'Comfortaa'"
+          >swag<span class="text-blue-400">tag</span></span
+        >
+        on your software and you can then engage services based on what
+        <span class="text-pink-400" style="font-family: 'Comfortaa'"
+          >swag<span class="text-blue-400">tag</span></span
+        >s they own
+      </div>
+    </section>
+    <footer
+      class="bg-blue-400 py-4 w-full bg-cover text-center flex flex-col items-center justify-center"
+      style="
+          center;
+      "
+    >
+      <ul class="text-sm list-none p-0 flex items-center">
+        <li>
+          <span
+            class="text-pink-300"
+            style="font-family: 'Comfortaa'; font-size: 22px"
+            >swag<span class="text-blue-300">tag</span></span
+          >
+        </li>
+        <li>
+          <a
+            href="https://discord.gg/NED33mNpms"
+            class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
+            >discord</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
+            >client app</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
+            >nameserver</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
+            >relay</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="inline-block py-2 px-3 text-gray-100 hover:text-gray-400 no-underline"
+            >source</a
+          >
+        </li>
+      </ul>
+    </footer>
+  </body>
+</html>
