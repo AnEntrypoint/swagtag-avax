@@ -67,7 +67,7 @@
       "
     >
       <div class=" ">
-        <form onsubmit="location = '/dashboard.html#/'+document.getElementById('swagtag').value">
+        <form onsubmit="event.preventDefault(); location = '/dashboard.html#/'+document.getElementById('swagtag').value">
         <input
           type="text"
           name="swagtag"
