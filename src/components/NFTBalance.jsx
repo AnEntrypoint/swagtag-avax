@@ -32,14 +32,19 @@ function NFTBalance() {
   //const { verifyMetadata } = useVerifyMetadata();
   const [isPriceModalVisible, setIsPriceModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [ip, setIp] = useState();
+  const [ip, preSetIp] = useState();
+  const setIp = ip=>preSetIp(JSON.stringify(ip));
   const [ip1, setIp1] = useState();
   const [ip2, setIp2] = useState();
   const [ip3, setIp3] = useState();
   const [ip4, setIp4] = useState();
   const [cname, setCname] = useState();
   const [nft, setNft] = useState();
-  const [domain, setDomain] = useState();
+  const [tokenName, setTokenName] = useState();
+  const [description, setDescription] = useState();
+  const [image, setImage] = useState();
+  console.log("LANDED", window.landed)
+  const [domain, setDomain] = useState(window.landed);
   const [price, setPrice] = useState();
   if(!chainId) return '';
   const { networks, abi } = DNS[chainId];
@@ -62,12 +67,11 @@ function NFTBalance() {
         setIsPending(false);
       });
   }
-
+const tester = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 function validateIPaddress(ipaddress) {  
-  if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+  if (tester.test(ipaddress)) {  
     return (true)  
   }  
-  alert("You have entered an invalid IP address!")  
   return (false)  
 }  
 
@@ -77,15 +81,18 @@ function validateIPaddress(ipaddress) {
     if(ip2 && !validateIPaddress(ip2)) throw new Error('second ip invalid')
     if(ip3 && !validateIPaddress(ip3)) throw new Error('third ip invalid')
     if(ip4 && !validateIPaddress(ip4)) throw new Error('fourth ip invalid')
-    let out = ip1;
-    if(ip2) out += ip2;
-    if(ip3) out += ip3;
-    if(ip4) out += ip4;
-    return out;
+    const ips = [];
+    ips.push(ip1)
+    if(ip2) ips.push(ip2)
+    if(ip3) ips.push(ip3)
+    if(ip4) ips.push(ip4)
+    return {tokenName,description,image,ips};
   }
   const buildIpFromCname=()=> {
     if(!cname) throw new Error('has to have a cname')
-    return 'cname:'+cname+':'+buildIp();
+    const out = buildIp();
+    out.cname = cname;
+    return out;
   }
 
   const handleTransferClick = (nft) => {
@@ -219,23 +226,48 @@ function validateIPaddress(ipaddress) {
       <Modal title="Edit" visible={isEditModalVisible} disabled={isPending} onOk={()=>{edit()}} onCancel={()=>{setIsEditModalVisible(false)}}>
             <Tabs defaultActiveKey="1">
               <TabPane tab="a" key="1">
-                <Input value={ip1} onChange={(e)=>{setIp1(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
-                <Input value={ip2} onChange={(e)=>{setIp2(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
-                <Input value={ip3} onChange={(e)=>{setIp3(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
-                <Input value={ip4} onChange={(e)=>{setIp4(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
+                <h2>erc</h2>
+                <Input value={tokenName} onChange={(e)=>{setTokenName(e.target.value.trim());setIp(buildIp())}} placeholder="name" />
+                <Input value={description} onChange={(e)=>{setDescription(e.target.value.trim());setIp(buildIp())}} placeholder="description" />
+                <Input value={image} onChange={(e)=>{setImage(e.target.value.trim());setIp(buildIp())}} placeholder="image url" />
+                <hr/>
+                <h2>ip</h2>
+                <Input value={ip1} onChange={(e)=>{setIp1(e.target.value.trim());setIp(buildIp())}} placeholder="ip address" />
+                <Input value={ip2} onChange={(e)=>{setIp2(e.target.value.trim());setIp(buildIp())}} placeholder="ip address" />
+                <Input value={ip3} onChange={(e)=>{setIp3(e.target.value.trim());setIp(buildIp())}} placeholder="ip address" />
+                <Input value={ip4} onChange={(e)=>{setIp4(e.target.value.trim());setIp(buildIp())}} placeholder="ip address" />
               </TabPane>
               <TabPane tab="cname" key="2">
-                <Input value={cname} onChange={(e)=>{setCname(e.target.value);setIp(buildIpFromCname())}} placeholder="cname" />
-                <Input value={ip1} onChange={(e)=>{setIp1(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
-                <Input value={ip2} onChange={(e)=>{setIp2(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
-                <Input value={ip3} onChange={(e)=>{setIp3(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
-                <Input value={ip4} onChange={(e)=>{setIp4(e.target.value);setIp(buildIpFromCname())}} placeholder="ip address" />
+                <h2>erc</h2>
+                <Input value={tokenName} onChange={(e)=>{setTokenName(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="name" />
+                <Input value={description} onChange={(e)=>{setDescription(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="description" />
+                <Input value={image} onChange={(e)=>{setImage(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="image url" />
+                <hr/>
+                <h2>cname</h2>
+                <Input value={cname} onChange={(e)=>{setCname(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="cname" />
+                <h2>ip</h2>
+                <Input value={ip1} onChange={(e)=>{setIp1(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="ip address" />
+                <Input value={ip2} onChange={(e)=>{setIp2(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="ip address" />
+                <Input value={ip3} onChange={(e)=>{setIp3(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="ip address" />
+                <Input value={ip4} onChange={(e)=>{setIp4(e.target.value.trim());setIp(buildIpFromCname())}} placeholder="ip address" />
               </TabPane>
               <TabPane tab="ddns" key="3">
-                <Input onChange={(e)=>{setIp(e.target.value)}} placeholder="tunnel key" />
+                <h2>erc</h2>
+                <Input value={description} onChange={(e)=>{setDescription(e.target.value.trim());setIp({tokenName,description,image,ddns:e.target.value.trim()})}} placeholder="description" />
+                <Input value={image} onChange={(e)=>{setImage(e.target.value.trim());setIp({tokenName,description,image,ddns:e.target.value.trim()})}} placeholder="image url" />
+                <Input value={cname} onChange={(e)=>{setCname(e.target.value.trim());setIp({tokenName,description,image,ddns:e.target.value.trim()})}} placeholder="cname" />
+                <hr/>
+                <h2>ip</h2>
+                <Input onChange={(e)=>{setIp({tokenName,description,image,ddns:e.target.value.trim()})}} placeholder="tunnel key" />
               </TabPane>
               <TabPane tab="tunnel" key="4">
-                <Input onChange={(e)=>{setIp(e.target.value)}} placeholder="tunnel key" />
+                <h2>erc</h2>
+                <Input value={description} onChange={(e)=>{setDescription(e.target.value.trim());setIp({tokenName,description,image,tunnel:e.target.value.trim()})}} placeholder="description" />
+                <Input value={image} onChange={(e)=>{setImage(e.target.value.trim());setIp({tokenName,description,image,tunnel:e.target.value.trim()})}} placeholder="image url" />
+                <Input value={cname} onChange={(e)=>{setCname(e.target.value.trim());setIp({tokenName,description,image,tunnel:e.target.value.trim()})}} placeholder="cname" />
+                <hr/>
+                <h2>ip</h2>
+                <Input onChange={(e)=>{setIp({tokenName,description,image,tunnel:e.target.value.trim()})}} placeholder="tunnel key" />
               </TabPane>
             </Tabs>
       </Modal>

@@ -7,18 +7,6 @@ function MenuItems() {
   const { isAuthenticated, chainId} = useMoralis();
   const { pathname } = useLocation();
 
-  if(
-    chainId === '0xa869' &&
-    !window.location.toString().startsWith('https://dashboard.fuji.avax.ga')
-  ) {
-    window.location = 'https://www.fuji.avax.ga'
-  }
-  if(
-    chainId === '0xa86a' &&
-    !window.location.toString().startsWith('https://dashboard.fuji.avax.ga')
-  ) {
-    window.location = 'https://dashboard.fuji.avax.ga'
-  }
   return (
     <Menu
       theme="light"
@@ -29,7 +17,7 @@ function MenuItems() {
         fontSize: "17px",
         fontWeight: "500",
         width: "100%",
-        justifyontent: "center",
+        justifyContent: "center",
       }}
       defaultSelectedKeys={[pathname]}
     >

@@ -30,7 +30,7 @@ const Application = () => {
 };
   // <React.StrictMode>
   // </React.StrictMode>,
-window.landed = window.location.toString().split('/').pop();
+window.landed = window.location.hash.toString().replace('#/', '');
 if(window.landed === 'nft' || window.landed === 'market' || window.landed === 'welcome') window.landed = '';
 ReactDOM.render(
     <HttpsRedirect>
