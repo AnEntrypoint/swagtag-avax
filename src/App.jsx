@@ -7,6 +7,7 @@ import "./style.css";
 import Welcome from "components/Welcome";
 import Market from "components/Market";
 import NFTBalance from "components/NFTBalance";
+import Pay from "components/Pay";
 import Contract from "components/Contract/Contract";
 import Text from "antd/lib/typography/Text";
 import Logo from "components/Logo";
@@ -81,6 +82,9 @@ const App = ({ isServerInfo }) => {
             <Route path="/contract">
               <Contract />
             </Route>
+            <Route exact path="/pay">
+              <Pay isServerInfo={isServerInfo} />
+            </Route>
             <Route path="/">
               <Redirect to="/welcome" />
             </Route>
@@ -93,14 +97,14 @@ const App = ({ isServerInfo }) => {
       <Footer style={{ textAlign: "center", background:"#fff"}}>
         <Text style={{ display: "block" }}>
           ⭐️ Please star this{" "}
-          <a href="https://github.com/AnEntrypoint/udns-dapp" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/AnEntrypoint/swagtag-dapp" target="_blank" rel="noopener noreferrer">
             internet breaking project
           </a>
           , every star makes us very happy!! ⭐️
         </Text>
 
         <Text style={{ display: "block" }}>
-          🙋 Got questions? Ask them by visiting {""}
+          🙋 inspired? got any questions? come say hi at {""}
           <a target="_blank" rel="noopener noreferrer" href="https://dsc.gg/entrypoint">
           our community  
           </a>
@@ -108,7 +112,7 @@ const App = ({ isServerInfo }) => {
         </Text>
 
         <Text style={{ display: "block" }}>
-          📖 Read more about{" "}
+          read more about{" "}
            
           <a
             target="_blank"

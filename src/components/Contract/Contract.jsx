@@ -9,7 +9,8 @@ import ContractMethods from "./ContractMethods";
 export default function Contract() {
   const { Moralis } = useMoralis();
   const [responses, setResponses] = useState({});
-  const { contractName, networks, abi } = DNS;
+  const {  chainId } = useMoralis();
+  const { contractName, networks, abi } = DNS[chainId];
 
   const contractAddress = useMemo(() => networks['1'].address, [networks]);
 
