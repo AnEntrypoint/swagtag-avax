@@ -59,14 +59,14 @@ const App = ({ isServerInfo }) => {
   return (
     <Layout style={{ height: "100vh", overflow: "auto", background:'#fff'}}>
       <Router>
-        <Header style={styles.header}>
+      {window.location.hash!=='#/pay'?<Header style={styles.header}>
           <Logo />
           <MenuItems />
           <div style={styles.headerRight}>
-            <Chains/>
+            {isAuthenticated?<Chains/>:null}
             <Account />
           </div>
-        </Header>
+        </Header>:null}
 
         <div style={styles.content}>
           <Switch>
@@ -82,7 +82,7 @@ const App = ({ isServerInfo }) => {
             <Route path="/contract">
               <Contract />
             </Route>
-            <Route exact path="/pay">
+            <Route path="/pay">
               <Pay isServerInfo={isServerInfo} />
             </Route>
             <Route path="/">
@@ -95,7 +95,7 @@ const App = ({ isServerInfo }) => {
         </div>
       </Router>
       <Footer style={{ textAlign: "center", background:"#fff"}}>
-        <Text style={{ display: "block" }}>
+        {window.location.hash!=='#/pay'?<><Text style={{ display: "block" }}>
           ⭐️ Please star this{" "}
           <a href="https://github.com/AnEntrypoint/swagtag-dapp" target="_blank" rel="noopener noreferrer">
             internet breaking project
@@ -109,7 +109,7 @@ const App = ({ isServerInfo }) => {
           our community  
           </a>
           🙋
-        </Text>
+        </Text></>:null}
 
         <Text style={{ display: "block" }}>
           read more about{" "}
