@@ -97,7 +97,7 @@ function EditMenu(props) {
   const updateTunnel = () => {
     if (mode !== "tunnel") return;
     try {
-      if (tunnel.length !== 59) throw new Error("invalid public key");
+      if (tunnel.length !== 52) throw new Error("invalid public key");
       setIp({ tokenName, description, image, tunnel, mode });
       setDisabled(false);
       setError("");

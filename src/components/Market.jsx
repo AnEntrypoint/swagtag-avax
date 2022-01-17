@@ -9,12 +9,12 @@ export default function Market(props) {
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  let name;
-  if (chainId === "0xa869") name = "FujiTrade";
-  if (chainId === "0xa86a") name = "AvaxTrade";
+  const [name, setName] = useState([]);
+  if (chainId === "0xa869" && name.toString() !== 'Fuji') setName("Fuji");
+  if (chainId === "0xa86a" && name.toString() !== 'Avax') setName("Avax");
 
   const query = useMoralisQuery(
-    name,
+    "Fuji",
     (q) => {
       q.descending("createdAt");
       return q;
@@ -29,9 +29,10 @@ export default function Market(props) {
       },
     }
   );
-  useEffect(() => {
+
+useEffect(() => {
     setData(query.data);
-  }, [query]);
+}, [chainId, query]);
 
   if (!chainId) return "";
   const { networks, abi } = DNS[chainId];
@@ -67,7 +68,7 @@ export default function Market(props) {
               }}
             >
               <div style={{ width: "100%" }}>
-                {object.get("name")}:{" "}
+                {object.get("name").replace('https://domains.fuji.avax.ga/','').replace('https://domains.avax.ga/','')}:{" "}
                 {value.toFixed(32).replace(/0+$/, "").replace(/\.+$/, "")} AVAX
               </div>
               <Button

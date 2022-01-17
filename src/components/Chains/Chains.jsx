@@ -42,11 +42,13 @@ function Chains() {
     setSelected(newSelected);
   }, [chainId]);
 
-  const handleMenuClick = (e) => {
+  const handleMenuClick = async (e) => {
     console.log("switch to: ", e.key);
     
     console.log('redirect set');
-    switchNetwork(e.key);
+    await switchNetwork(e.key);
+    if(e.key == '0xa869' && !window.location.toString().includes('fuji')) window.location = 'https://www.fuji.avax.ga/dashboard.html';
+    if(e.key == '0xa86a' && window.location.toString().includes('fuji')) window.location = 'https://www.avax.ga/dashboard.html';
     setRedirect('/dashboard');
   };
   const menu = (
