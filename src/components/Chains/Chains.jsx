@@ -36,8 +36,8 @@ function Chains() {
   const { switchNetwork, chainId } = useChain();
   const [selected, setSelected] = useState({});
   const [redirect, setRedirect] = useState(null);
-  if(chainId === '0xa869' && !window.location.toString().includes('fuji')) window.location = 'https://www.fuji.avax.ga/dashboard.html'+window.location.replace('https://www.avax.ga/dashboard.html','');
-  if(chainId === '0xa86a' && window.location.toString().includes('fuji')) window.location = 'https://www.avax.ga/dashboard.html'+window.location.replace('https://www.fuji.avax.ga/dashboard.html','');
+  if(chainId === '0xa869' && !window.location.toString().includes('fuji')) window.location = 'https://www.fuji.avax.ga/dashboard.html';
+  if(chainId === '0xa86a' && window.location.toString().includes('fuji')) window.location = 'https://www.avax.ga/dashboard.html';
   useEffect(() => {
     if (!chainId) return null;
     const newSelected = menuItems.find((item) => item.key === chainId);

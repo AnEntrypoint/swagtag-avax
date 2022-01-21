@@ -163,6 +163,7 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
         public
     {
         require(ownerOf(_names[_name]) == msg.sender, "Only the owner can do this");
+        _id_to_name[_names[_name]] = _name; //TODO: remove after allowing first addresses to fix themselves
         _addresses[_name] = _address;
     }
 
