@@ -9,12 +9,12 @@ export default function Market(props) {
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  const [name, setName] = useState([]);
-  if (chainId === "0xa869" && name.toString() !== 'Fuji') setName("Fuji");
-  if (chainId === "0xa86a" && name.toString() !== 'Avax') setName("Avax");
+  const [name, setName] = useState('Avax');
+  if (chainId === "0xa869" && name.toString() !== "Fuji") setName("Fuji");
+  if (chainId === "0xa86a" && name.toString() !== "Avax") setName("Avax");
 
   const query = useMoralisQuery(
-    "Fuji",
+    name,
     (q) => {
       q.descending("createdAt");
       return q;
@@ -30,14 +30,14 @@ export default function Market(props) {
     }
   );
 
-useEffect(() => {
+  useEffect(() => {
     setData(query.data);
-}, [chainId, query]);
+  }, [chainId, query]);
 
   if (!chainId) return "";
   const { networks, abi } = DNS[chainId];
-  const contractAddress = networks["1"].address;
-
+  const contractAddress = networks[parseInt(chainId)].address;
+  
   const buy = async (_trade, value) => {
     const options = {
       contractAddress,
@@ -68,8 +68,12 @@ useEffect(() => {
               }}
             >
               <div style={{ width: "100%" }}>
-                {object.get("name").replace('https://domains.fuji.avax.ga/','').replace('https://domains.avax.ga/','')}:{" "}
-                {value.toFixed(32).replace(/0+$/, "").replace(/\.+$/, "")} AVAX
+                {object
+                  .get("name")
+                  .replace("https://domains.fuji.avax.ga/", "")
+                  .replace("https://domains.avax.ga/", "")}
+                : {value.toFixed(32).replace(/0+$/, "").replace(/\.+$/, "")}{" "}
+                AVAX
               </div>
               <Button
                 disabled={loading}
