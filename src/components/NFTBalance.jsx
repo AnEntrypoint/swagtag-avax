@@ -15,11 +15,12 @@ import {
   FileSearchOutlined,
   SendOutlined,
   ShoppingCartOutlined,
+  CaretUpOutlined
 } from "@ant-design/icons";
 import AddressInput from "./AddressInput";
 import { useVerifyMetadata } from "hooks/useVerifyMetadata";
 import DNS from "contracts/swagtag.js";
-import {validateSubdomain} from "helpers/validators.js";
+import { validateSubdomain } from "helpers/validators.js";
 import EditMenu from "components/EditMenu.jsx";
 const { Meta } = Card;
 
@@ -65,8 +66,8 @@ function NFTBalance() {
 
   if (!chainId) return "";
   const { networks, abi } = DNS[chainId];
-  const contractAddress = networks["1"].address;
-
+  const contractAddress = networks[parseInt(chainId)].address;
+  
   async function transfer(nft, receiver) {
     const options = {
       type: nft.contract_type,
@@ -93,23 +94,21 @@ function NFTBalance() {
 
   const claim = async (base) => {
     setIsPending(true);
-    let name = base;
-    //if (chainId === "0xa869") name = "https://domains.fuji.avax.ga/" + base;
-    //if (chainId === "0xa86a") name = "https://domains.avax.ga/" + base;
-    if(!validateSubdomain) {
-      alert('invalid swagtag, please stick to plan text only');
+    let _name = base;
+    if (!validateSubdomain) {
+      alert("invalid swagtag, please stick to plan text only");
       return;
     }
     const out = {
       contractAddress,
       functionName: "mintToken",
       abi,
-      params: { name },
+      params: { _name },
       msgValue: parseInt(10000000000000000),
     };
     try {
       await Moralis.executeFunction(out);
-    } catch(e) {
+    } catch (e) {
       console.trace(e);
     }
     setIsPending(false);
@@ -128,12 +127,16 @@ function NFTBalance() {
     console.log({ out });
     try {
       await Moralis.executeFunction(out);
-    } catch(e) {
+    } catch (e) {
       console.trace(e);
     }
     setIsPending(false);
   };
-
+  const bump = async (nft) => {
+    let name;
+    const params =  { id: nft.token_id };
+    console.log( await Moralis.Cloud.run("Bump", params) );
+  };
   const approve = async () => {
     setIsPending(true);
     setIsPriceModalVisible(false);
@@ -141,12 +144,12 @@ function NFTBalance() {
       contractAddress,
       functionName: "setApprovalForAll",
       abi,
-      params: { operator: contractAddress, approved:true },
+      params: { operator: contractAddress, approved: true },
     };
     console.log({ out });
     try {
       await Moralis.executeFunction(out);
-    } catch(e) {
+    } catch (e) {
       console.trace(e);
     }
     setIsPending(false);
@@ -157,29 +160,31 @@ function NFTBalance() {
         contractAddress,
         functionName: "isApprovedForAll",
         abi,
-        params: { owner : account, operator : contractAddress },
+        params: { owner: account, operator: contractAddress },
       })
     );
-    console.log({data});
-    if (!data && window.confirm('Would you like to approve the swagtag marketplace?')) {
+    console.log({ data });
+    if (
+      !data &&
+      window.confirm("Would you like to approve the swagtag marketplace?")
+    ) {
       approve();
     } else {
       setSelected(nft);
       setIsPriceModalVisible(true);
-      console.log('showing price modal')
+      console.log("showing price modal");
     }
-  }
+  };
   const drawnft = (nft, index) => {
     let domain;
     if (chainId === "0xa869") domain = "https://domains.fuji.avax.ga/";
     if (chainId === "0xa86a") domain = "https://domains.avax.ga/";
     //if (!nft.token_uri.startsWith('https://domains.avax.ga/') ||) return;
     //if (nft.token_uri.includes("#")) return;
-    if(!nft.token_uri) return null;
+    if (!nft.token_uri) return null;
     let link = nft.token_uri.toString().replace(domain, "");
-    if (!link.length) return;
     if (!link) return;
-    console.log({link})
+    if (!link.length) return;
     if (nft.token_address.toLowerCase() !== contractAddress.toLowerCase())
       return null;
     nft = verifyMetadata(nft);
@@ -192,7 +197,7 @@ function NFTBalance() {
         }}
         actions={[
           isPending && selected?.token_uri === nft?.token_uri ? (
-            <div style={{ textAlign: "center" }}></div>
+            <div></div>
           ) : (
             <Tooltip title="Edit">
               <FileSearchOutlined
@@ -201,22 +206,25 @@ function NFTBalance() {
                   let data = { ips: [] };
                   setIsPending(true);
                   try {
-                    data = 
-                      await Moralis.executeFunction({
-                        contractAddress,
-                        functionName: "getAddress",
-                        abi,
-                        params: { _name: nft?.token_uri.replace('https://domains.avax.ga/','').replace('https://domains.fuji.avax.ga/','') },
-                      })
-                      console.log(data);
-                    data = data.length?JSON.parse(data):{};
+                    data = await Moralis.executeFunction({
+                      contractAddress,
+                      functionName: "getAddress",
+                      abi,
+                      params: {
+                        _name: nft?.token_uri
+                          .replace("https://domains.avax.ga/", "")
+                          .replace("https://domains.fuji.avax.ga/", ""),
+                      },
+                    });
+                    console.log(data);
+                    data = data.length ? JSON.parse(data) : {};
                   } catch (e) {
                     console.log(e);
                   }
-                  if(!data.ips) data.ips = [];
+                  if (!data.ips) data.ips = [];
                   setConfig(data);
                   setIsPending(false);
-                  
+
                   setIsEditModalVisible(true);
                 }}
                 style={{ display: isPending ? "none" : "block" }}
@@ -236,12 +244,26 @@ function NFTBalance() {
             </Tooltip>
           ),
           isPending && selected?.token_uri === nft?.token_uri ? (
-            <div style={{ textAlign: "center" }}></div>
+            <div></div>
           ) : (
             <Tooltip title="Sell On Marketplace">
               <ShoppingCartOutlined
                 style={{ display: isPending ? "none" : "block" }}
-                onClick={()=>{showPriceModal(nft)}}
+                onClick={() => {
+                  showPriceModal(nft);
+                }}
+              />
+            </Tooltip>
+          ),
+          isPending && selected?.token_uri === nft?.token_uri ? (
+            <div></div>
+          ) : (
+            <Tooltip title="Bump">
+              <CaretUpOutlined
+                style={{ display: isPending ? "none" : "block" }}
+                onClick={() => {
+                  bump(nft);
+                }}
               />
             </Tooltip>
           ),
@@ -265,12 +287,19 @@ function NFTBalance() {
   const edit = async () => {
     setIsEditModalVisible(false);
     setIsPending(true);
+    const config = Object.assign({}, ip);
+    config.uri = selected?.token_uri;
     try {
       await Moralis.executeFunction({
         contractAddress,
         functionName: "setAddress",
         abi,
-        params: { _name: selected?.token_uri.replace('https://domains.avax.ga/','').replace('https://domains.fuji.avax.ga/',''), _address: JSON.stringify(ip) },
+        params: {
+          _name: selected?.token_uri
+            .replace("https://domains.avax.ga/", "")
+            .replace("https://domains.fuji.avax.ga/", ""),
+          _address: JSON.stringify(ip),
+        },
       });
     } catch (e) {
       console.trace(e);

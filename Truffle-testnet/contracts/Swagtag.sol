@@ -33,7 +33,7 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://domains.fuji.avax.ga/";
+        return "https://domains.avax.ga/";
     }
 
     function safeMint(address to, string memory uri) public onlyOwner {
@@ -55,22 +55,35 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
         emit Payment(_amount, tokenURI(_item), _item, _memo);
     }
 
+    /**
+     * @dev pays a swagtag owner, emitting an event
+     * @param _name The name of an existing item
+     * @param _amount the wei amount
+     */
+    function payName(string memory _name, uint256 _amount, string memory _memo) public payable virtual {
+        uint256 _item =  _names[_name];
+        uint256 fee = _amount/100;
+        payable(ownerOf(_item)).transfer(_amount-fee);
+        payable(owner()).transfer(fee);
+        emit Payment(_amount, tokenURI(_item), _item, _memo);
+    }
 
     /**
      * @dev mint a fresh swagtag
-     * @param name the swagtag name
+     * @param _name the swagtag name
      */
-    function mintToken(string memory name)
+    function mintToken(string memory _name)
         public
         payable
         returns (uint256)
     {
         _tokenIdCounter.increment();
-        require( !(_names[name]>0), "Token already exists" );
+        require( !(_names[_name]>0), "Token already exists" );
         uint256 newItemId = _tokenIdCounter.current();
         _mint(msg.sender, newItemId);
-        _setTokenURI(newItemId, name);
-        _names[name] = newItemId;
+        _id_to_name[newItemId] = _name;
+        _setTokenURI(newItemId, _name);
+        _names[_name] = newItemId;
         payable(owner()).transfer(10000000000000000);
         return newItemId;
     }    
@@ -90,16 +103,17 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
-    function _burn(uint256 tokenId)
+    function _burn(uint256 _tokenId)
         internal
         override(ERC721Upgradeable, ERC721URIStorageUpgradeable)
     {
-        super._burn(tokenId);
-        string memory name = tokenURI(tokenId);
-        if (_names[name] != 0) {
-            delete _names[name];
-            delete _addresses[name];
-            if(_id_to_trade[tokenId]>0) delete _id_to_trade[tokenId];
+        super._burn(_tokenId);
+        string memory _name = _id_to_name[_tokenId];
+        if (_names[_name] != 0) {
+            delete _id_to_name[_tokenId];
+            delete _names[_name];
+            delete _addresses[_name];
+            if(_id_to_trade[_tokenId]>0) delete _id_to_trade[_tokenId];
         }
     }
 
@@ -121,12 +135,20 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
         return super.supportsInterface(interfaceId);
     }
 
-        function getAddress(string memory _name)
+    function getAddress(string memory _name)
         public
         view
         returns(string memory)
     {
         return _addresses[_name];
+    }
+
+    function getId(string memory _name)
+        public
+        view
+        returns(uint256 id)
+    {
+        return _names[_name];
     }
 
     function getName(uint256 tokenId)
@@ -250,5 +272,22 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
         emit TradeStatusChange(_trade, "Cancelled", 0,tokenURI(trade.item), trade.item);
     }
 
+    mapping(uint256 => string) _id_to_name;
+
+    function getNameForId(uint256 _tokenId)
+        public
+        view
+        returns(string memory)
+    {
+        return _id_to_name[_tokenId];
+    }
+
+    function getAddressForId(uint256 _tokenId)
+        public
+        view
+        returns(string memory)
+    {
+        return _addresses[_id_to_name[_tokenId]];
+    }
 
 }
