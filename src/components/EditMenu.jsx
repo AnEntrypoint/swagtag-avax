@@ -24,6 +24,9 @@ function EditMenu(props) {
   const [cname, setCname] = useState(props.config.cname);
 
   const [title, setTitle] = useState(props.config.title);
+  const [discord, setDiscord] = useState(props.config.discord);
+  const [telegram, setTelegram] = useState(props.config.telegram);
+  const [twitter, setTwitter] = useState(props.config.twitter);
   const [description, setDescription] = useState(props.config.description);
   const [image, setImage] = useState(props.config.image);
   const [ddns, setDdns] = useState(props.config.ddns);
@@ -46,7 +49,7 @@ function EditMenu(props) {
     if (ip3) ips.push(ip3);
     if (ip4) ips.push(ip4);
     return { title, description, image, ips, mode };
-  }, [description, image, ip1, ip2, ip3, ip4, mode, title]);
+  }, [description, image, ip1, ip2, ip3, ip4, mode, title, discord, telegram, twitter]);
 
   const buildIpFromCname = useCallback(
     (state) => {
@@ -88,7 +91,7 @@ function EditMenu(props) {
     console.log("ddns mode");
     try {
       if (ddns.length !== 57) throw new Error("invalid public key");
-      setIp({ title, description, image, ddns, mode });
+      setIp({ title, description, image, ddns, mode, discord, telegram, twitter });
       setDisabled(false);
       setError("");
     } catch (e) {
@@ -100,7 +103,7 @@ function EditMenu(props) {
     if (mode !== "tunnel") return;
     try {
       if (tunnel.length !== 52) throw new Error("invalid public key");
-      setIp({ title, description, image, tunnel, mode });
+      setIp({ title, description, image, tunnel, mode, discord, telegram, twitter });
       setDisabled(false);
       setError("");
     } catch (e) {
@@ -108,10 +111,10 @@ function EditMenu(props) {
       setDisabled(true);
     }
   };
-  useEffect(updateDDNS, [ddns, description, image, mode, setIp, title]);
-  useEffect(updateCNAME, [description, image, mode, buildIpFromCname, setIp]);
-  useEffect(updateTunnel, [description, image, mode, setIp, title, tunnel]);
-  useEffect(updateA, [buildIp, setDisabled, setError, setIp, mode]);
+  useEffect(updateDDNS, [ddns, description, image, mode, setIp, title, discord, telegram, twitter]);
+  useEffect(updateCNAME, [description, image, mode, buildIpFromCname, setIp, discord, telegram, twitter]);
+  useEffect(updateTunnel, [description, image, mode, setIp, title, tunnel, discord, telegram, twitter]);
+  useEffect(updateA, [buildIp, setDisabled, setError, setIp, mode, discord, telegram, twitter, title, image, description]);
 
   return (
     <Modal
@@ -135,6 +138,21 @@ function EditMenu(props) {
         value={image}
         onChange={(e) => setImage(e.target.value)}
         placeholder="image url"
+      />
+      <Input
+        value={discord}
+        onChange={(e) => setDiscord(e.target.value)}
+        placeholder="discord"
+      />
+      <Input
+        value={telegram}
+        onChange={(e) => setTelegram(e.target.value)}
+        placeholder="telegram"
+      />
+      <Input
+        value={twitter}
+        onChange={(e) => setTwitter(e.target.value)}
+        placeholder="twitter"
       />
       <Tabs centered defaultActiveKey={mode} onTabClick={(t) => setMode(t)}>
         <TabPane tab="a" key="a">
