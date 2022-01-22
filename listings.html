@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Tailwind CSS -->
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <title>swagtag public listings</title>
+  </head>
+  <body>
+    <div class="pt-6 pb-12 bg-gray-300">  
+  <div id="card" class="">
+    <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
+      <div id="list">
+        
+      </div>
+    </div>
+  </div>
+</div>
+    <script>
+    const getCard = props=>`
+      <div v-for="card in cards" class="flex flex-col md:flex-row overflow-hidden bg-white rounded-lg shadow-xl mt-4 w-100 mx-2">
+        <!-- media -->
+        <div class="h-64 w-auto md:w-1/2">
+          <img class="inset-0 h-full w-full object-cover object-center" src="${props.address.image}" />
+        </div>
+        <!-- content -->
+        <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
+          <h2 class="text-sm text-gray-700 text-lg uppercase tracking-wide font-semibold mt-2">
+            <a href="https://${props.name}.fuji.avax.ga">${props.name}.fuji.avax.ga</>
+          </h2>
+          <h4 class="font-semibold leading-tight truncate">${props.address.title}</h4>
+          <p class="mt-2">
+            ${props.address.description}
+          </p>
+        </div>
+      </div>
+    `;
+      
+      fetch('https://bumps.fuji.avax.ga').then(a=>a.json()).then(data=>data.forEach(item=>document.getElementById('list').innerHTML += getCard(item)));
+    </script>
+  </body>
+</html>
