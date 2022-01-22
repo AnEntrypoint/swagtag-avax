@@ -66,8 +66,8 @@ function NFTBalance() {
 
   if (!chainId) return "";
   const { networks, abi } = DNS[chainId];
-  const contractAddress = networks[parseInt(chainId)].address;
-  
+  const contractAddress = networks["1"].address;
+
   async function transfer(nft, receiver) {
     const options = {
       type: nft.contract_type,
@@ -94,7 +94,9 @@ function NFTBalance() {
 
   const claim = async (base) => {
     setIsPending(true);
-    let _name = base;
+    let name = base;
+    //if (chainId === "0xa869") name = "https://domains.fuji.avax.ga/" + base;
+    //if (chainId === "0xa86a") name = "https://domains.avax.ga/" + base;
     if (!validateSubdomain) {
       alert("invalid swagtag, please stick to plan text only");
       return;
@@ -103,7 +105,7 @@ function NFTBalance() {
       contractAddress,
       functionName: "mintToken",
       abi,
-      params: { _name },
+      params: { name },
       msgValue: parseInt(10000000000000000),
     };
     try {
@@ -183,8 +185,9 @@ function NFTBalance() {
     //if (nft.token_uri.includes("#")) return;
     if (!nft.token_uri) return null;
     let link = nft.token_uri.toString().replace(domain, "");
-    if (!link) return;
     if (!link.length) return;
+    if (!link) return;
+    console.log({ link });
     if (nft.token_address.toLowerCase() !== contractAddress.toLowerCase())
       return null;
     nft = verifyMetadata(nft);

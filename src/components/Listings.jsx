@@ -69,7 +69,7 @@ const contractAddress = networks[parseInt(chainId)].address;
           border: "1px solid #e7eaf3",
           borderRadius: "0.5rem",
         }}
-      ><Button         onClick={getList}      >test</Button></Card>
+      ><Button onClick={getList}>test</Button></Card>
     </div>
   );
 }
