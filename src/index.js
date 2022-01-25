@@ -13,7 +13,6 @@ const SERVER_URL =  !window.location.toString().includes('fuji')?process.env.REA
 
 const Application = () => {
   const isServerInfo = APP_ID && SERVER_URL ? true : false;
-  console.log({APP_ID,SERVER_URL},window.location.toString().includes('fuji'))
   if(!APP_ID || !SERVER_URL) throw new Error("Missing Moralis Application ID or Server URL. Make sure to set your .env file.");
   if (isServerInfo)
     return (

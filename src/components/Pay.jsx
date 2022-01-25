@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 import React, { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import DNS from "contracts/swagtag.js";
+import Chains from "components/Chains";
+import Account from "components/Account/Account";
 
 /**
  * Shows a payment form
@@ -11,19 +13,16 @@ import DNS from "contracts/swagtag.js";
  */
 
 function Pay(props) {
-  const { Moralis, chainId } = useMoralis();
+  const { Moralis, chainId, isAuthenticated } = useMoralis();
   const [name, setName] = useState(null);
   const [item, setItem] = useState(null);
   const [swagtag, setSwagtag] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(true);
-  const { networks, abi } = DNS[chainId]
-    ? DNS[chainId]
-    : { networks: { 1: { address: null } }, abi: null };
-    const contractAddress = networks[parseInt(chainId)].address;
-    useEffect(() => {
-    if (!chainId || !name) return;
-    if (swagtag) return;
+  const [contractAddress, setContractAddress] = useState();
+  const [abi, setAbi] = useState();
+  useEffect(() => {
+    if (!chainId || !name || !DNS[chainId] || !contractAddress || swagtag) return;
     Moralis.enableWeb3().then(() => {
       Moralis.executeFunction({
         contractAddress,
@@ -36,7 +35,40 @@ function Pay(props) {
       });
     });
   }, [name, Moralis, abi, chainId, contractAddress, swagtag]);
-  if (!chainId) return false;
+  if (!isAuthenticated) {
+    return (
+      <div>
+        <Account />
+      </div>
+    );
+  }
+  
+  if(window.location.toString().includes('fuji') && chainId !== '0xa869') {
+    return <div>
+      Please switch to Avalanche testnet:
+      <Chains net='testnet'/>
+    </div>
+  }
+  if(!window.location.toString().includes('fuji') && chainId !== '0xa86a') {
+    return  <div>
+      Please switch to Avalanche mainnet:
+      <Chains net='mainnet'/>
+    </div>
+  }
+
+  if (!chainId || !DNS[chainId]) {
+    console.log(chainId, DNS[chainId]);
+    return (chainId !== "0xa869" || chainId !== "0xa86a") && isAuthenticated ? (
+      <div>
+        Please switch to Avalanche:
+        <Chains />
+      </div>
+    ) : null;
+  }
+  const { networks } = DNS[chainId];
+  if (contractAddress !== networks[parseInt(chainId)]?.address)
+    setContractAddress(networks[parseInt(chainId)]?.address);
+  if (abi !== DNS[chainId]?.abi) setAbi(DNS[chainId]?.abi);
 
   const { location } = props;
   const vars = location.pathname.split("/");
