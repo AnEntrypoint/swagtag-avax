@@ -15,8 +15,8 @@
     <title>swagtag public listings</title>
   </head>
   <body style="font-family: 'Ubuntu'">
-    <div class="container p-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="list"></div>
+    <div class="container p-8 m-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 " id="list"></div>
     </div>
     <style>
       .disabled: {
@@ -26,41 +26,42 @@
     <script>
     const getCard = props=>`
     <article class="overflow-hidden w-full rounded-lg shadow-lg">
+                        <header class="flex text-center justify-between leading-tight p-2 md:p-4 font-black">
+                          <a class="no-underline" target="_blank" href="https://${props.name}.fuji.avax.ga">
+                            <span class="text-blue-400">https://<span class="text-pink-400">${props.name}</span>.fujiavax.ga</span>
+                          </a>
+                        </header>
 
                 <a href="https://${props.name}.fuji.avax.ga">
                   <div class="bg-cover bg-center border h-64" style="background-image:url('${props.address.image}')">
                   </div>
                 </a>
 
-                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h1 class="text-lg">
-                        <a class="no-underline hover:underline text-black" target="_blank" href="https://${props.name}.fuji.avax.ga">
-                          <p class="ml-2 text-kg">
+                <header class="p-2 md:p-4">
+                    <div class="text-lg text-center">
+                      <p class="ml-2">
                               ${props.address.title}
                           </p>
-                        </a>
-                    </h1>
-                    <p class="text-gray-500 text-sm">
-                        <a class="no-underline" target="_blank" href="https://${props.name}.fuji.avax.ga">
-                        https://${props.name}.fuji.avax.ga
-                        </a>
-                    </p>
+                    </div>
                 </header>
                 <p class="p-4 h-32">${props.address.description}</p>
-                <footer class="flex items-center justify-between leading-none p-8 md:p-4">
-                    <a ${!props.address?.twitter?.length?'style="opacity:0.4;filter: saturate(0%);"':''} class="flex items-center no-underline hover:underline text-black" href="${props.address?.twitter?.length?props.address?.twitter:'#'}">
+                <footer class="flex items-center justify-between leading-none p-8 md:p-4 mx-12">
+                    <a ${!props.address?.twitter?.length?'style="cursor:auto; opacity:0.4;filter: saturate(0%);"':''} class="flex items-center no-underline hover:underline text-black" href="${props.address?.twitter?.length?props.address?.twitter:'#'}">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px"><path fill="#03A9F4" d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"/></svg>
                     </a>
-                    <a ${!props.address?.discord?.length?'style="opacity:0.4;filter: saturate(0%);"':''}  class="flex items-center no-underline hover:underline text-black" href="${props.address?.discord?.length?props.address?.discord:'#'}">
+                    <a ${!props.address?.discord?.length?'style="cursor:auto; opacity:0.4;filter: saturate(0%);"':''}  class="flex items-center no-underline hover:underline text-black" href="${props.address?.discord?.length?props.address?.discord:'#'}">
                       <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 71 55" fill="none"><g clip-path="url(#clip0)"><path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#5865F2"/></g><defs><clipPath id="clip0"><rect width="71" height="55" fill="white"/></clipPath></defs></svg>
                     </a>
-                    <a ${!props.address?.telegram?.length?'style="opacity:0.4;filter: saturate(0%);"':''}  class="flex items-center no-underline hover:underline text-black" href="${props.address?.discord?.length?props.address?.discord:'#'}">
+                    <a ${!props.address?.telegram?.length?'style="cursor:auto; opacity:0.4;filter: saturate(0%);"':''}  class="flex items-center no-underline hover:underline text-black" href="${props.address?.discord?.length?props.address?.discord:'#'}">
                       <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" xmlns:xlink="http://www.w3.org/1999/xlink" id="Livello_1" data-name="Livello 1" viewBox="0 0 240 240"><defs><linearGradient id="linear-gradient" x1="120" y1="240" x2="120" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1d93d2"/><stop offset="1" stop-color="#38b0e3"/></linearGradient></defs><title>Telegram_logo</title><circle cx="120" cy="120" r="120" fill="url(#linear-gradient)"/><path d="M81.229,128.772l14.237,39.406s1.78,3.687,3.686,3.687,30.255-29.492,30.255-29.492l31.525-60.89L81.737,118.6Z" fill="#c8daea"/><path d="M100.106,138.878l-2.733,29.046s-1.144,8.9,7.754,0,17.415-15.763,17.415-15.763" fill="#a9c6d8"/><path d="M81.486,130.178,52.2,120.636s-3.5-1.42-2.373-4.64c.232-.664.7-1.229,2.1-2.2,6.489-4.523,120.106-45.36,120.106-45.36s3.208-1.081,5.1-.362a2.766,2.766,0,0,1,1.885,2.055,9.357,9.357,0,0,1,.254,2.585c-.009.752-.1,1.449-.169,2.542-.692,11.165-21.4,94.493-21.4,94.493s-1.239,4.876-5.678,5.043A8.13,8.13,0,0,1,146.1,172.5c-8.711-7.493-38.819-27.727-45.472-32.177a1.27,1.27,0,0,1-.546-.9c-.093-.469.417-1.05.417-1.05s52.426-46.6,53.821-51.492c.108-.379-.3-.566-.848-.4-3.482,1.281-63.844,39.4-70.506,43.607A3.21,3.21,0,0,1,81.486,130.178Z" fill="#fff"/></svg>
+                    </a>
+                    <a ${!props.address?.github?.length?'style="cursor:auto; opacity:0.4;filter: saturate(0%);"':''}  class="flex items-center no-underline hover:underline text-black" href="${props.address?.discord?.length?props.address?.discord:'#'}">
+                      <svg xmlns="http://www.w3.org/2000/svg"  width="38" height="38" viewBox="0 0 1024 1024" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#1B1F23"/></svg>
                     </a>
                 </footer>
 
             </article>
-    `;fetch('https://bumps.fuji.avax.ga').then(a=>a.json()).then(data=>data.forEach(item=>document.getElementById('list').innerHTML += getCard(item)));
+    `;fetch('https://bumps.fujiavax.ga').then(a=>a.json()).then(data=>data.forEach(item=>document.getElementById('list').innerHTML += getCard(item)));
     </script>
   </body>
 </html>
