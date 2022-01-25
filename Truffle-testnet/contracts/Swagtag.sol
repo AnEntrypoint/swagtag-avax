@@ -33,7 +33,7 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://domains.fuji.avax.ga/";
+        return "https://domains.fujiavax.ga/";
     }
 
     function safeMint(address to, string memory uri) public onlyOwner {

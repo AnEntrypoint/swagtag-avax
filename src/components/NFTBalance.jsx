@@ -15,7 +15,7 @@ import {
   FileSearchOutlined,
   SendOutlined,
   ShoppingCartOutlined,
-  CaretUpOutlined
+  CaretUpOutlined,
 } from "@ant-design/icons";
 import AddressInput from "./AddressInput";
 import { useVerifyMetadata } from "hooks/useVerifyMetadata";
@@ -64,9 +64,9 @@ function NFTBalance() {
     }
   }*/
 
-  if (!chainId) return "";
+  if(!chainId || !DNS[chainId]) return <></>;
   const { networks, abi } = DNS[chainId];
-  const contractAddress = networks["1"].address;
+  const contractAddress = networks[parseInt(chainId)].address;
 
   async function transfer(nft, receiver) {
     const options = {
@@ -105,7 +105,7 @@ function NFTBalance() {
       contractAddress,
       functionName: "mintToken",
       abi,
-      params: { name },
+      params: { _name: name },
       msgValue: parseInt(10000000000000000),
     };
     try {
@@ -115,6 +115,7 @@ function NFTBalance() {
     }
     setIsPending(false);
   };
+
   const sell = async () => {
     const _price = parseInt(price * 1000000000000000000).toString();
 
@@ -136,8 +137,8 @@ function NFTBalance() {
   };
   const bump = async (nft) => {
     let name;
-    const params =  { id: nft.token_id };
-    console.log( await Moralis.Cloud.run("Bump", params) );
+    const params = { id: nft.token_id };
+    console.log(await Moralis.Cloud.run("Bump", params));
   };
   const approve = async () => {
     setIsPending(true);
@@ -179,15 +180,14 @@ function NFTBalance() {
   };
   const drawnft = (nft, index) => {
     let domain;
-    if (chainId === "0xa869") domain = "https://domains.fuji.avax.ga/";
+    if (chainId === "0xa869") domain = "https://domains.fujiavax.ga/";
     if (chainId === "0xa86a") domain = "https://domains.avax.ga/";
     //if (!nft.token_uri.startsWith('https://domains.avax.ga/') ||) return;
     //if (nft.token_uri.includes("#")) return;
     if (!nft.token_uri) return null;
-    let link = nft.token_uri.toString().replace(domain, "");
+    let link = nft.token_uri.toString().replace(domain, "").replace('https://domains.fuji.avax.ga/', "");
     if (!link.length) return;
     if (!link) return;
-    console.log({ link });
     if (nft.token_address.toLowerCase() !== contractAddress.toLowerCase())
       return null;
     nft = verifyMetadata(nft);
@@ -216,7 +216,8 @@ function NFTBalance() {
                       params: {
                         _name: nft?.token_uri
                           .replace("https://domains.avax.ga/", "")
-                          .replace("https://domains.fuji.avax.ga/", ""),
+                          .replace("https://domains.fuji.avax.ga/", "")
+                          .replace("https://domains.fujiavax.ga/", ""),
                       },
                     });
                     console.log(data);
@@ -292,6 +293,7 @@ function NFTBalance() {
     setIsPending(true);
     const config = Object.assign({}, ip);
     config.uri = selected?.token_uri;
+    console.log(config);
     try {
       await Moralis.executeFunction({
         contractAddress,
@@ -300,8 +302,9 @@ function NFTBalance() {
         params: {
           _name: selected?.token_uri
             .replace("https://domains.avax.ga/", "")
-            .replace("https://domains.fuji.avax.ga/", ""),
-          _address: JSON.stringify(ip),
+            .replace("https://domains.fuji.avax.ga/", "")
+            .replace("https://domains.fujiavax.ga/", ""),
+          _address: JSON.stringify(config),
         },
       });
     } catch (e) {

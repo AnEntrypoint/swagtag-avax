@@ -3,7 +3,6 @@ import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { AvaxLogo } from "./Logos";
 import { useChain } from "react-moralis";
-import { Redirect  } from "react-router-dom";
 const styles = {
   item: {
     display: "flex",
@@ -19,37 +18,50 @@ const styles = {
   },
 };
 
-const menuItems = [
-  {
-    key: "0xa86a",
-    value: "Avalanche",
-    icon: <AvaxLogo />,
-  },
-  {
-    key: "0xa869",
-    value: "Avalanche Testnet",
-    icon: <AvaxLogo />,
-  },
-];
+const networks = {
+  mainnet: [
+    {
+      key: "0xa86a",
+      value: "Avalanche",
+      icon: <AvaxLogo />,
+    },
+  ],
+  testnet: [
+    {
+      key: "0xa869",
+      value: "Avalanche Testnet",
+      icon: <AvaxLogo />,
+    },
+  ],
+};
 
-function Chains() {
+function Chains(props) {
   const { switchNetwork, chainId } = useChain();
   const [selected, setSelected] = useState({});
-  const [redirect, setRedirect] = useState(null);
-  if(chainId === '0xa869' && !window.location.toString().includes('fuji')) window.location = 'https://www.fuji.avax.ga/dashboard.html';
-  if(chainId === '0xa86a' && window.location.toString().includes('fuji')) window.location = 'https://www.avax.ga/dashboard.html';
+  const menuItems = [];
+  if (!props.net) {
+    if (chainId === "0xa869" && !window.location.toString().includes("fuji"))
+      window.location =
+        "https://www.fujiavax.ga/dashboard.html" + window.location.hash;
+    if (chainId === "0xa86a" && window.location.toString().includes("fuji"))
+      window.location =
+        "https://www.avax.ga/dashboard.html" + window.location.hash;
+    for(let net of networks.testnet) menuItems.push(net);
+    for(let net of networks.mainnet) menuItems.push(net);
+  } else {
+    if(props.net === 'testnet') for(let net of networks.testnet) menuItems.push(net);
+    if(props.net === 'mainnet') for(let net of networks.mainnet) menuItems.push(net);
+  }
+  const newSelected = menuItems.find((item) => item.key === chainId);
   useEffect(() => {
     if (!chainId) return null;
-    const newSelected = menuItems.find((item) => item.key === chainId);
-    setSelected(newSelected);
-  }, [chainId]);
+    if(newSelected !== selected) setSelected(newSelected);
+  }, [chainId, newSelected, selected]);
 
   const handleMenuClick = async (e) => {
     console.log("switch to: ", e.key);
-    
-    console.log('redirect set');
+
     await switchNetwork(e.key);
-    setRedirect('/dashboard');
   };
   const menu = (
     <Menu onClick={handleMenuClick}>
@@ -60,19 +72,22 @@ function Chains() {
       ))}
     </Menu>
   );
-  
+
   return (
-    (
-      <div>
-        {redirect?<Redirect to={redirect}/>:null}
-        <Dropdown overlay={menu} trigger={["click"]}>
-          <Button key={selected?.key} icon={selected?.icon} style={{ ...styles.button, ...styles.item }}>
-            <span style={{ marginLeft: "5px" }}>{selected?.value||'Please select'}</span>
-            <DownOutlined />
-          </Button>
-        </Dropdown>
-      </div>
-    )
+    <div>
+      <Dropdown overlay={menu} trigger={["click"]}>
+        <Button
+          key={selected?.key}
+          icon={selected?.icon}
+          style={{ ...styles.button, ...styles.item }}
+        >
+          <span style={{ marginLeft: "5px" }}>
+            {selected?.value || "Please select"}
+          </span>
+          <DownOutlined />
+        </Button>
+      </Dropdown>
+    </div>
   );
 }
 
