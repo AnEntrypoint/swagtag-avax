@@ -70,7 +70,6 @@ export default function Market(props) {
               <div style={{ width: "100%" }}>
                 {object
                   .get("name")
-                  .replace("https://domains.fuji.avax.ga/", "")
                   .replace("https://domains.fujiavax.ga/", "")
                   .replace("https://domains.avax.ga/", "")}
                 : {value.toFixed(32).replace(/0+$/, "").replace(/\.+$/, "")}{" "}

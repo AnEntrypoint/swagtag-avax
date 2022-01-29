@@ -41,7 +41,7 @@ function EditMenu(props) {
   const buildIp = useCallback((requireIp1 = true) => {
     if (!title || !title.length) throw new Error("title is required");
     if (!description || !description.length) throw new Error("description is required");
-    if (requireIp1 && !ip1) throw new Error("has to have at least one ip");
+    //if (requireIp1 && !ip1) throw new Error("has to have at least one ip");
     if (ip1 && !tester.test(ip1)) throw new Error("first ip invalid");
     if (ip2 && !tester.test(ip2)) throw new Error("second ip invalid");
     if (ip3 && !tester.test(ip3)) throw new Error("third ip invalid");
