@@ -30,6 +30,12 @@ function MenuItems() {
       {!isAuthenticated||(chainId!=='0xa869'&&chainId!=='0xa86a')?(<Menu.Item key="/welcome">
         <NavLink to="/welcome">welcome</NavLink>
       </Menu.Item>):null}
+      {chainId==='0xa869'?(<Menu.Item key="/listings">
+        <a href="/fujilistings.html" target="_blank">listings</a>
+      </Menu.Item>):null}
+      {chainId==='0xa86a'?(<Menu.Item key="/listings">
+        <a href="/listings.html" target="_blank">listings</a>
+      </Menu.Item>):null}
     </Menu>
   );
 }
