@@ -100,6 +100,7 @@ function NFTBalance() {
     console.log({ options });
     try {
       await Moralis.transfer(options);
+      setRefresh(refresh + 1);
       setIsPending(false);
     } catch (e) {
       console.trace(e);
@@ -122,6 +123,7 @@ function NFTBalance() {
         _name: base,
       },
     });
+    console.log({exists});
     if (exists != '0') {
       const buy = async (_trade, value) => {
         console.log(_trade, value);
@@ -435,7 +437,7 @@ function NFTBalance() {
           width: "100%",
           boxShadow: "0 0.5rem 1.2rem rgb(189 197 209 / 20%)",
           border: "1px solid #e7eaf3",
-          borderRadius: "20px",
+          borderRadius: "0.5rem",
           overflow: "hidden",
         }}
       >
@@ -460,11 +462,13 @@ function NFTBalance() {
                 onChange={(e) => {
                   setDomain(e.target.value);
                 }}
+                style={{marginRight:"-70px"}}
                 placeholder="your swagtag like davinci or legolas"
               />
               <Button
                 type={isPending ? "secondary" : "primary"}
                 disabled={isPending}
+                shape="round"
                 onClick={() => {
                   claim(domain);
                 }}
