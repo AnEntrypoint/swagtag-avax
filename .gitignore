@@ -102,7 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
-Truffle/truffle-config.js
+Truffle-mainnet
 Truffle-testnet/truffle-config.js
 
 build

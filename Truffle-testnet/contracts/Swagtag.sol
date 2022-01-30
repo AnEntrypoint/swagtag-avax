@@ -211,7 +211,7 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
     {
         uint256 _trade = _id_to_trade[_id];
         Trade memory trade = trades[_trade];
-        return (trade.poster, trade.item, trade.price, trade.status);
+        return (trade.poster, trade.item, trade.price, trade.status, _trade);
     }
 
     /**

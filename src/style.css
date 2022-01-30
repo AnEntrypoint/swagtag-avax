@@ -20,3 +20,7 @@
   overflow: auto;
   border-radius: 1rem;
 }
+
+.ant-input {
+  border-radius: 25px;
+}

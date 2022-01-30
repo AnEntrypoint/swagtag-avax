@@ -24,12 +24,12 @@ export default function Welcome(props) {
           borderRadius: "0.5rem",
         }}
       >
+        {!isAuthenticated?<div>
+            Please authenticate using the button on the top right
+        </div>:null}
         {(chainId!=='0xa869'||chainId!=='0xa86a')&&isAuthenticated?<div>
             Please switch to Avalanche mainnet here on your Metamask:
             <Chains/>
-        </div>:null}
-        {!isAuthenticated?<div>
-            Please authenticate using the button on the top right
         </div>:null}
 
         {isAuthenticated&&(chainId==='0xa869'||chainId==='0xa86a')?<Redirect to={'/nft'}/>:null}

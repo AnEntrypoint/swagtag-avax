@@ -15,10 +15,8 @@ import Account from "components/Account/Account";
 function Pay(props) {
   const { Moralis, chainId, isAuthenticated } = useMoralis();
   const [name, setName] = useState(null);
-  const [item, setItem] = useState(null);
   const [swagtag, setSwagtag] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [sending, setSending] = useState(true);
   const [contractAddress, setContractAddress] = useState();
   const [abi, setAbi] = useState();
   useEffect(() => {
@@ -77,7 +75,6 @@ function Pay(props) {
   const [amount, tag, description, memo] = vars;
   if (tag.toString() !== name) setName(tag);
   const sell = async () => {
-    setSending(true);
     console.log(amount);
     try {
       await Moralis.executeFunction({
@@ -90,7 +87,6 @@ function Pay(props) {
     } catch (e) {
       console.trace(e);
     }
-    setSending(false);
   };
   return (
     <div>
