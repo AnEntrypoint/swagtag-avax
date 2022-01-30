@@ -61,7 +61,7 @@
                   </a>
                 </header>
 
-        <a href="https://${props.name}.avax.ga">
+        <a href="https://${props.name}.fujiavax.ga">
           <div class="bg-cover bg-center border h-64" style="background-image:url('${props.address.image}')">
           </div>
         </a>
@@ -99,7 +99,7 @@
       data.forEach(item=>document.getElementById('list').innerHTML += getCard(item));
     }
     
-    fetch('https://bumps.avax.ga').then(a=>{a.json().then((json)=>{window.data = json; update(json)})});
+    fetch('https://bumps.fujiavax.ga').then(a=>{a.json().then((json)=>{window.data = json; update(json)})});
     </script>
   </body>
 </html>
