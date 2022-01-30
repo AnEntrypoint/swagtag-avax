@@ -206,11 +206,11 @@ contract Swagtag is Initializable, ERC721Upgradeable, ERC721EnumerableUpgradeabl
         public
         virtual
         view
-        returns(address, uint256, uint256, bytes32)
+        returns(address, uint256, uint256, bytes32, uint256)
     {
         uint256 _trade = _id_to_trade[_id];
         Trade memory trade = trades[_trade];
-        return (trade.poster, trade.item, trade.price, trade.status);
+        return (trade.poster, trade.item, trade.price, trade.status, _trade);
     }
 
     /**
