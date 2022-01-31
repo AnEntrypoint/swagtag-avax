@@ -187,7 +187,7 @@ function EditMenu(props) {
         onChange={(e) => setGithub(e.target.value)}
         placeholder="github url"
       />
-      <Tabs centered defaultActiveKey={mode} onTabClick={(t) => setMode(t)}>
+      <Tabs centered defaultActiveKey={props.config.mode} onTabClick={(t) => setMode(t)}>
         <TabPane tab="a" key="a">
           <Input
             value={ip1}

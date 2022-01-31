@@ -402,18 +402,19 @@ function NFTBalance() {
     const config = Object.assign({}, ip);
     config.uri = selected.uri;
     console.log(config);
+    const _name = selected.uri.replace("https://domains.avax.ga/", "").replace("https://domains.fujiavax.ga/", "");
+    const _address = JSON.stringify(config);
     try {
       await Moralis.executeFunction({
         contractAddress,
         functionName: "setAddress",
         abi,
         params: {
-          _name: selected.uri
-            .replace("https://domains.avax.ga/", "")
-            .replace("https://domains.fujiavax.ga/", ""),
-          _address: JSON.stringify(config),
+          _name,
+          _address,
         },
       });
+      await fetch(selected.uri.replace(_name, '').replace('domains', 'reload.'+_name));
       setRefresh(refresh + 1);
     } catch (e) {
       console.trace(e);
