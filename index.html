@@ -345,9 +345,10 @@
       
             </article>
           `;
+
       window.update = (data) => {
         document.getElementById("list").innerHTML = "";
-        const loop = data;
+        const loop = data.splice(3,0);
         loop.forEach((item) => {
           console.log(item);
           return (document.getElementById("list").innerHTML += getCard(item));
