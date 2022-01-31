@@ -247,9 +247,6 @@
         /> GIF VERSION -->
       </div>
     </section>
-    <div class="container p-8 m-auto text-xl text-pink-500">
-      <a href="https://avax.ga/listings.html">view all</a>
-    </div>
     <div class="container p-8 m-auto">
       <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -359,13 +356,16 @@
 
       fetch("https://bumps.avax.ga").then((a) => {
         a.json().then((json) => {
-          window.data = json;
+          window.data = json.splice(3, 0);
           update(json);
         });
       });
     </script>
 
-    <div class="container p-8 m-auto text-xl text-pink-500">
+    <div class="container p-8 m-auto text-xl text-blue-400">
+      recently bumped swagtags
+    </div>
+    <div class="container p-8 m-auto text-xl text-pink-400">
       <a href="https://avax.ga/listings.html">view all</a>
     </div>
 
