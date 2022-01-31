@@ -31,6 +31,22 @@
     <title>swagtag public listings</title>
   </head>
   <body style="font-family: 'Ubuntu'">
+    <ul class="flex m-6 float-right">
+      <li class="mr-6">
+        <a
+          class="text-blue-400 hover:text-blue-700 text-xl"
+          href="/dashboard.html"
+          >dashboard</a
+        >
+      </li>
+      <li class="mr-6">
+        <a
+          class="text-pink-400 hover:text-pink-700 text-xl"
+          href="/listings.html"
+          >listings</a
+        >
+      </li>
+    </ul>
     <div class="pt-2 relative mx-8 text-gray-600 w-64 my-8 mx-auto">
       <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         type="search" name="search" oninput="update(data.filter(a=>a.address.uri.includes(event.target.value)||a.address.title.includes(event.target.value)||a.address.description.includes(event.target.value)))" placeholder="Search">
