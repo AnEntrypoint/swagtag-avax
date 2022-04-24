@@ -52,7 +52,7 @@
       };
       window.saveInput = async () => {
         let fetched = await fetch(
-          "https://exists.fuji.avax.ga/" +
+          "https://exists.mumbai.matic.247420.xyz/" +
             document.querySelector("#swagtag").value
         );
         const output = document.querySelector("#output");
@@ -70,7 +70,7 @@
           else output.innerHTML = "not available";
         }
         fetched = await fetch(
-          "https://exists.avax.ga/" + document.querySelector("#swagtag").value
+          "https://exists.matic.247420.xyz/" + document.querySelector("#swagtag").value
         );
         if (fetched) {
           const is = await fetched.text();
@@ -279,7 +279,7 @@
                         </a>
                       </header>
       
-              <a href="https://${props.name}.avax.ga">
+              <a href="https://${props.name}.matic.247420.xyz">
                 <div class="bg-cover bg-center border h-64" style="background-image:url('${
                   props.address.image
                 }')">
@@ -348,16 +348,16 @@
 
       window.update = (data) => {
         document.getElementById("list").innerHTML = "";
-        const loop = data.splice(0,3);
+        const loop = data.splice(3,0);
         loop.forEach((item) => {
           console.log(item);
           return (document.getElementById("list").innerHTML += getCard(item));
         });
       };
 
-      fetch("https://bumps.avax.ga").then((a) => {
+      fetch("https://bumps.matic.247420.xyz").then((a) => {
         a.json().then((json) => {
-          window.data = json.splice(3, 0);
+          window.data = json.splice(0, 3);
           update(json);
         });
       });
@@ -367,7 +367,7 @@
       recently bumped swagtags
     </div>
     <div class="container p-8 m-auto text-xl text-pink-400">
-      <a href="https://avax.ga/listings.html">view all</a>
+      <a href="https://matic.247420.xyz/listings.html">view all</a>
     </div>
 
     <section

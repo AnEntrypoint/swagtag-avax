@@ -52,7 +52,7 @@
       };
       window.saveInput = async () => {
         let fetched = await fetch(
-          "https://exists.fuji.avax.ga/" +
+          "https://exists.mumbai.matic.247420.xyz/" +
             document.querySelector("#swagtag").value
         );
         const output = document.querySelector("#output");
@@ -70,7 +70,7 @@
           else output.innerHTML = "not available";
         }
         fetched = await fetch(
-          "https://exists.avax.ga/" + document.querySelector("#swagtag").value
+          "https://exists.matic.247420.xyz/" + document.querySelector("#swagtag").value
         );
         if (fetched) {
           const is = await fetched.text();
@@ -244,7 +244,7 @@
       </div>
     </section>
     <div class="container p-8 m-auto text-xl text-pink-500">
-      <a href="https://avax.ga/listings.html">view all</a>
+      <a href="https://matic.247420.xyz/listings.html">view all</a>
     </div>
     <div class="container p-8 m-auto">
       <div
@@ -277,7 +277,7 @@
                     </a>
                   </header>
   
-          <a href="https://${props.name}.avax.ga">
+          <a href="https://${props.name}.matic.247420.xyz">
             <div class="bg-cover bg-center border h-64" style="background-image:url('${
               props.address.image
             }')">
@@ -347,7 +347,7 @@
         );
       };
 
-      fetch("https://bumps.avax.ga").then((a) => {
+      fetch("https://bumps.matic.247420.xyz").then((a) => {
         a.json().then((json) => {
           window.data = json;
           update(json);
@@ -355,7 +355,7 @@
       });
     </script>
     <div class="container p-8 m-auto text-xl text-pink-500">
-      <a href="https://avax.ga/listings.html">view all</a>
+      <a href="https://matic.247420.xyz/listings.html">view all</a>
     </div>
 
     <section
